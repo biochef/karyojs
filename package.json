@@ -1,0 +1,23 @@
+{
+  "name": "karyojs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chromosomal regions visualizer written in JavaScript",
+  "author": "Josemi Juanes <josemijuanes@gmail.com>",
+  "license": "MIT",
+  "files": [],
+  "homepage": "https://jmjuanes.github.io/karyojs",
+  "repository": {"type": "git", "url": "git://github.com/jmjuanes/karyojs.git"},
+  "keywords": ["karyo","karyojs","visualizer","javascript"],
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "svg.js": "^2.1.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.0.9",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "1.4.2",
+    "gulp-rename": "1.2.2",
+    "gulp-header": "1.7.1"
+  }
+}
