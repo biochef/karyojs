@@ -1,0 +1,98 @@
+<html>
+<head>
+
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/font.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+
+  <!-- JavaScript vendor -->
+  <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="../vendor/svgjs/svg.min.js"></script>
+
+  <!-- Javascript libs -->
+  <script type="text/javascript" src="../src/karyo.js"></script>
+  <script type="text/javascript" src="../src/build.js"></script>
+  <script type="text/javascript" src="../src/size.js"></script>
+  <script type="text/javascript" src="../src/resize.js"></script>
+  <script type="text/javascript" src="../src/use.js"></script>
+  <script type="text/javascript" src="../src/import.js"></script>
+  <script type="text/javascript" src="../src/callback.js"></script>
+  <script type="text/javascript" src="../src/utils.js"></script>
+  <script type="text/javascript" src="../src/navbar.js"></script>
+  <script type="text/javascript" src="../src/get.js"></script>
+  <script type="text/javascript" src="../src/select.js"></script>
+  <script type="text/javascript" src="../src/cursor.js"></script>
+  <script type="text/javascript" src="../src/foot.js"></script>
+  <script type="text/javascript" src="../src/options.js"></script>
+  <script type="text/javascript" src="../src/loading.js"></script>
+  <script type="text/javascript" src="../src/alert.js"></script>
+  <script type="text/javascript" src="../src/events/mouse.js"></script>
+  <script type="text/javascript" src="../src/events/mouse-move.js"></script>
+  <script type="text/javascript" src="../src/events/mouse-up.js"></script>
+  <script type="text/javascript" src="../src/events/mouse-down.js"></script>
+  <script type="text/javascript" src="../src/draw/draw.js"></script>
+  <script type="text/javascript" src="../src/draw/draw-list.js"></script>
+  <script type="text/javascript" src="../src/draw/draw-detail.js"></script>
+  <script type="text/javascript" src="../src/plugins/plugins.js"></script>
+  <script type="text/javascript" src="../src/plugins/genome-maps.js"></script>
+
+  <!-- JavaScript runs -->
+  <script type="text/javascript">
+
+    //Initialize the element
+    var k = null;
+
+    //When document is ready
+    $(document).ready(function(){
+
+      //Create the new Karyo element
+      k = new Karyo('karyo_div');
+
+      //Use the Human test specie
+      k.ImportChrs('../examples/species/human.json');
+
+      //Use the human test data
+      k.ImportRegions('../examples/data.json');
+
+      //Callback for click or select region
+      //k.Callback(function(chr, start, end){ )});
+
+      //Callback when user clicks on the Go Back button
+      //k.CallbackGoBack(function(){ });
+
+      //Callback when user clicks on the Search button
+      //k.CallbackSearch(function(regsel){ });
+
+      //Labels
+      k.UseLabel({
+        chromosome: function(chr){
+          //Get the regions for this chromosome
+          var regs = k.GetRegionsByChr(chr);
+
+          //Check if exists
+          if(regs) { return '' + regs.length + ' positions'; }
+
+          //Return default
+          return '0 positions';
+        },
+        region: function(chr, reg){
+
+          //Get the regions for this chromosome
+          var regs = k.GetRegionsByChr(chr);
+
+          //Return the label
+          return '' + regs[reg].label + ' reads';
+        }
+      });
+
+    });
+  </script>
+
+</head>
+<body style="margin: 10px; padding: 0px; background-color: #eaf0f2;">
+
+  <!-- Content div -->
+  <div id="karyo_div"></div>
+
+</body>
+</html>
