@@ -21,7 +21,7 @@ Karyo.prototype.MouseDown = function(x, y)
         if(this.select.on === true)
         {
           //Check if user has clicked on the rectangle
-          if(this.svg.draw.select.posx1 + this.select.margin < x && x < this.svg.draw.select.posx2 - this.select.margin)
+          if(this.svg.draw.select.posx1 < x && x < this.svg.draw.select.posx2)
           {
             //Activate the drag
             this.selectdrag.move = true;

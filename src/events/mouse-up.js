@@ -38,11 +38,15 @@ Karyo.prototype.MouseUpDetail = function(x, y)
     //Check if user has move
     if(this.select.move === true)
     {
+      //Check if select is enabled
+      if(this.select.enabled === true)
+      {
+        //Generate the callback
+        this.SelectRunCallback();
+      }
+
       //Set move as false
       this.select.move = false;
-
-      //Generate the callback
-      this.SelectRunCallback();
     }
     else
     {
@@ -50,7 +54,7 @@ Karyo.prototype.MouseUpDetail = function(x, y)
       this.SelectDestroy();
 
       //Return the opacity as true
-      this.DrawChrDetailRegionsOp(1.0);
+      //this.DrawChrDetailRegionsOp(1.0);
     }
   }
   else
@@ -66,7 +70,7 @@ Karyo.prototype.MouseUpDetail = function(x, y)
     this.SelectDestroy();
 
     //Return the opacity as true
-    this.DrawChrDetailRegionsOp(1.0);
+    //this.DrawChrDetailRegionsOp(1.0);
   }
 
   //Set select down false

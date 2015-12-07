@@ -78,9 +78,9 @@ Karyo.prototype.MouseMoveDetail = function(x, y)
     //Draw the hover
     this.DrawChrDetailHover(x);
 
-    //Check if select down is true
+    //Check if select down is true and select is enabled
     //if(this.select.down === true && (this.select.lastx - x) !== 0)
-    if(this.select.down === true)
+    if(this.select.down === true && this.select.enabled === true)
     {
       //Change the lastx
       //this.select.lastx = -100;
@@ -149,21 +149,21 @@ Karyo.prototype.MouseMoveDetail = function(x, y)
         var near2 = this.PosNear(x, this.svg.draw.select.posx2, this.select.margin);
 
         //Check if is near
-        if(near1 === true || near2 === true)
-        {
-          //Hide cursor
-          this.CursorHide();
-
-          //Show cursor resize
-          this.Cursor('resize');
-        }
-        else if(this.svg.draw.select.posx1 < x && x < this.svg.draw.select.posx2)
+        if(this.svg.draw.select.posx1 < x && x < this.svg.draw.select.posx2)
         {
           //Hide cursor
           this.CursorHide();
 
           //Show cursor move
           this.Cursor('move');
+        }
+        else if(near1 === true || near2 === true)
+        {
+          //Hide cursor
+          this.CursorHide();
+
+          //Show cursor resize
+          this.Cursor('resize');
         }
       }
 

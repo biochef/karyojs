@@ -125,7 +125,10 @@ function Karyo(parent_id)
   this.select.down = false; //For check if user has clicked on the region
   this.select.last = 0; //Last point for check direction
   this.select.lastx = 0; //Last position x
-  this.select.margin = 4; //Margin for capture the click
+  this.select.margin = 5; //Margin for capture the click
+  this.select.max = -1; //Max select region
+  this.select.limitset = false; //For check if user has limited the select length
+  this.select.enabled = true; //Select enabled
 
   //Select drag
   this.selectdrag = {};
@@ -164,7 +167,7 @@ function Karyo(parent_id)
   this.alert.time = 4000; //Alert time visible
   this.alert.typeclass = 'karyo-alert-'; //Alert type class
   this.alert.type = ''; //Alert type
-  this.alert.tip = false; //For show alert tip only one time
+  this.alert.tip = true; //For show alert tip
 
   //Alert container
   this.alertcont = {};

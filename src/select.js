@@ -194,7 +194,6 @@ Karyo.prototype.SelectDraw = function(anim)
     this.svg.draw.select.line1.animate(200).opacity(this.selectline.opacity);
     this.svg.draw.select.line2.animate(200).opacity(this.selectline.opacity);
 
-
     //Add the opacity for the rectangle
     this.svg.draw.selectlabel.rect.opacity(0.0);
 
@@ -263,6 +262,9 @@ Karyo.prototype.SelectDrag = function(x)
 //Karyo select move
 Karyo.prototype.SelectMove = function(x)
 {
+  //For save the increment var
+  var incr = 1;
+
   //Check if is first move
   if(this.select.move === false)
   {
@@ -284,11 +286,17 @@ Karyo.prototype.SelectMove = function(x)
   {
     //Save as start
     this.select.start = pos;
+
+    //Save the increment as 1
+    incr = 1;
   }
   else if(pos > this.select.end )
   {
     //Save as end
     this.select.end = pos;
+
+    //Save the increment as 0
+    incr = 0;
   }
   else
   {
@@ -297,11 +305,33 @@ Karyo.prototype.SelectMove = function(x)
     {
       //Change the end
       this.select.start = pos;
+
+      //Save the increment as 1
+      incr = 1;
     }
     else if(this.select.last - pos > 1)
     {
       //Change the start
       this.select.end = pos;
+
+      //Save the increment as 0
+      incr = 0;
+    }
+  }
+
+  //Check for limit region
+  if(this.select.max > -1 && this.select.end - this.select.start > this.select.max)
+  {
+    //Restart the select end or start
+    if(incr === 1)
+    {
+      //Restart the start
+      this.select.start = this.select.end - this.select.max;
+    }
+    else
+    {
+      //Restart the end
+      this.select.end = this.select.start + this.select.max;
     }
   }
 
