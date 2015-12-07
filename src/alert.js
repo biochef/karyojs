@@ -51,8 +51,12 @@ Karyo.prototype.AlertResize = function()
 //Karyo Alert Tip Creator
 Karyo.prototype.AlertTip = function()
 {
-  //Create the tip
-  this.AlertShow('tip', this.alertmsg.tip);
+  //Check for alert tip
+  if(this.alert.tip === true)
+  {
+    //Create the tip
+    this.AlertShow('tip', this.alertmsg.tip);
+  }
 };
 
 //Karyo alert error
