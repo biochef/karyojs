@@ -19,7 +19,7 @@ var banner = ['/**',
   '', ''].join('\n');
 
 //Output dir
-var output = 'build/' + pkg.version + '/';
+var output = 'build/';
 
 //Files list
 var files = ['src/karyo.js', 'src/build.js', 'src/callback.js', 'src/cursor.js', 'src/foot.js', 'src/get.js',
