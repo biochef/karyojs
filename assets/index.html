@@ -1,0 +1,88 @@
+<html>
+<head>
+
+  <!-- Title -->
+  <title>Karyo.js test</title>
+
+  <!-- Styles for Karyo.js -->
+  <link rel="stylesheet" type="text/css" href="css/font.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <!-- JavaScript vendor -->
+  <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="vendor/svgjs/svg.min.js"></script>
+
+  <!-- Javascript Karyo.js -->
+  <script type="text/javascript" src="js/karyo.min.js"></script>
+
+  <!-- JavaScript runs -->
+  <script type="text/javascript">
+
+    //Initialize the element
+    var k = null;
+
+    //When document is ready
+    $(document).ready(function(){
+
+      //Create the new Karyo element
+      k = new Karyo('karyo_div');
+
+      //Import the chromosomes list
+      k.ImportChrs('../../examples/species/human.json');
+
+      //Import your regions data
+      k.ImportRegions('../../examples/data.json');
+
+      //Callback for click or select region
+      //k.Callback(function(chr, start, end){ )});
+
+      //Callback when user clicks on the Go Back button
+      //k.CallbackGoBack(function(){ });
+
+      //Callback when user clicks on the Search button
+      //k.CallbackSearch(function(regsel){ });
+
+      //Options for Karyo
+      k.Options({
+        //navbarHeight: 50,
+        //navbarShow: true,
+        //navbarShowKaryo: true,
+        //navbarShowSearch: true,
+        //tipShow: true,
+        //tipText: 'You can personalize the tip message!',
+        //selectMax: -1,
+        //selectEnabled: true
+      });
+
+      //Labels
+      k.UseLabel({
+        chromosome: function(chr){
+          //Get the regions for this chromosome
+          var regs = k.GetRegionsByChr(chr);
+
+          //Check if exists
+          if(regs) { return '' + regs.length + ' positions'; }
+
+          //Return default
+          return '0 positions';
+        },
+        region: function(chr, reg){
+          //Get the regions for this chromosome
+          var regs = k.GetRegionsByChr(chr);
+
+          //Return the label
+          return '' + regs[reg].label + ' reads';
+        }
+      });
+
+    });
+  </script>
+
+</head>
+<body style="margin: 10px; padding: 0px; background-color: #eaf0f2;">
+
+  <!-- Content div -->
+  <div id="karyo_div"></div>
+
+</body>
+</html>
