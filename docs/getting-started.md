@@ -2,11 +2,14 @@
 
 On this guide you can learn how to add **Karyo.JS** to your web application.
 
-### Download
+For integrate the tool on your web application, first you must download it from the [releases page](https://github.com/jmjuanes/karyojs/releases) or clone the repository. We recommend the first option if you want to download the latest stable release.
 
-You can download the latest version from [here](https://github.com/jmjuanes/karyojs/releases).
+Also, you can build your own version compiling the source code. Read the [build documentation](build.md) for get more information about this.
 
-Once you have downloaded and decompress the zip file, you can navigate into the `build` folder, which contains all the processed and minimized styles, scripts and images needed for run **Karyo.JS**:
+
+### What is included?
+
+Once you have downloaded and decompress the zip file or build your custom version, the compiled styles, scripts and images needed for run **Karyo.JS** are placed at the `build` folder. If you navigate to this folder, you will see the next folder structure:
 
 ```
 .
@@ -32,3 +35,6 @@ Once you have downloaded and decompress the zip file, you can navigate into the 
 ```
 
 You must copy all the folders to a folder on your project public folder.
+
+
+### Add to your project
