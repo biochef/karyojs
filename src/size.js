@@ -7,7 +7,7 @@ Karyo.prototype.SetSize = function(w, h)
 
   //Calculate the width for the navbar
   var navw = 'calc(' + w + ' - ' + this.navbar.padding.left + 'px - ' + this.navbar.padding.right + 'px)';
-  console.log(navw);
+  
   //Resize the navbar
   $('#' + this.navbar.id).css('width', navw);
   $('#' + this.navbar.id).height(this.navbar.height);
