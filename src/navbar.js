@@ -15,44 +15,47 @@ Karyo.prototype.NavbarBuild = function()
   div = div + '>';
 
   //Create the go back button
-  if(this.navbar.showBtnKaryo === true)
+  if(this.navbar.btnKaryoShow === true)
   {
     //Create the div
-    div = div + '<div class="' + this.navbar.btnKaryo + '" id="' + this.navbar.id + '_home"';
-
-    //Add the background image
-    //div = div + 'style="background-image: url(\'' + this.default.img + this.navbar.BtnKaryo + '\');" ';
+    div = div + '<div class="' + this.navbar.btnKaryoClass + '" id="' + this.navbar.btnKaryo + '"';
 
     //Add the title
-    div = div + 'title="Return to karyotypes"';
+    div = div + 'title="' + this.navbar.btnKaryoTitle + '"';
 
     //Close the tiv
     div = div + '></div>';
   }
 
   //Create the search button and bar
-  if(this.navbar.showBtnSearch === true)
+  if(this.navbar.btnSearchShow === true)
   {
     //Create the text input for te search button
-    div = div + '<div class="' + this.navbar.input + '" id="' + this.navbar.id + '_input" ';
-    div = div + 'data-placeholder="' + this.navbar.placeholder + '" contenteditable></div>';
+    div = div + '<input type="text" class="' + this.navbar.inputClass + '" id="' + this.navbar.input + '"';
+    div = div + ' placeholder="' + this.navbar.inputPlaceholder + '">';
 
     //Create the div for the search button
-    div = div + '<div class="' + this.navbar.btnSearch + '" id="' + this.navbar.id + '_search"';
-
-    //Add the background image
-    //div = div + 'style="background-image: url(\'' + this.default.img + this.navbar.BtnSearch + '\');" ';
+    div = div + '<div class="' + this.navbar.btnSearchClass + '" id="' + this.navbar.btnSearch + '"';
 
     //Add the title
-    div = div + 'title="Show region"';
+    div = div + 'title="' + this.navbar.btnSearchTitle + '"';
 
     //Close the button div
     div = div + '></div>';
   }
 
   //Create the Karyo logo
-  //div = div + '<a href="' + this.info.web + '" class="' + this.navbar.btnLogo + '" target="_blank"></a>';
-  //div = div + 'style="background-image: url(\'' + this.default.img + this.navbar.BtnLogo + '\');"></a>';
+  if(this.navbar.btnHelpShow === true)
+  {
+    //Create the div for the help button
+    div = div + '<div class="' + this.navbar.btnHelpClass + '" id="' + this.navbar.btnHelp + '"';
+
+    //Add the title
+    div = div + 'title="' + this.navbar.btnHelpTitle + '"';
+
+    //Close the button div
+    div = div + '></div>';
+  }
 
   //Close the div
   div = div + '</div>';
@@ -69,6 +72,9 @@ Karyo.prototype.NavbarEvnt = function()
 
   //Start the navbar search button
   KaryoNavbarBtnSearchEvnt(this);
+
+  //Start the navbar help button
+  KaryoNavbarBtnHelpEvnt(this);
 };
 
 //Karyo Home button Click
@@ -115,7 +121,7 @@ Karyo.prototype.NavbarBtnSearchClick = function()
   }
 
   //Get the region selected
-  var regsel = $('#' + this.navbar.id + '_input').text();
+  var regsel = $('#' + this.navbar.input).text();
 
   //Check
   if(regsel && regsel !== '')
@@ -138,11 +144,18 @@ Karyo.prototype.NavbarBtnSearchClick = function()
   }
 };
 
+//Karyo Help button click
+Karyo.prototype.NavbarBtnHelpClick = function()
+{
+  //Open the help on a new window
+  
+}
+
 //Navbar Home Event
 function KaryoNavbarBtnHomeEvnt(_main)
 {
   //If click
-  $('#' + _main.navbar.id + '_home').click(function(e){
+  $('#' + _main.navbar.btnKaryo).click(function(e){
 
     //Prevent default
     e.preventDefault();
@@ -157,13 +170,28 @@ function KaryoNavbarBtnHomeEvnt(_main)
 function KaryoNavbarBtnSearchEvnt(_main)
 {
   //If click
-  $('#' + _main.navbar.id + '_search').click(function(e){
+  $('#' + _main.navbar.btnSearch).click(function(e){
 
     //Prevent default
     e.preventDefault();
 
     //Call the Click function
     _main.NavbarBtnSearchClick();
+
+  });
+}
+
+//Karyo Navbar Help Event
+function KaryoNavbarBtnHelpEvnt(_main)
+{
+  //If click
+  $('#' + _main.navbar.btnHelp).click(function(e){
+
+    //Prevent default
+    e.preventDefault();
+
+    //Call the Click function
+    _main.NavbarBtnHelpClick();
 
   });
 }

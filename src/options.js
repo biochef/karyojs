@@ -8,10 +8,13 @@ Karyo.prototype.Options = function(opt)
   if(typeof opt.navbarShow !== 'undefined'){ this.navbar.show = opt.navbarShow; }
 
   //Check navbar show karyotype button
-  if(typeof opt.navbarShowKaryo !== 'undefined'){ this.navbar.showBtnKaryo = opt.navbarShowKaryo; }
+  if(typeof opt.navbarShowKaryo !== 'undefined'){ this.navbar.btnKaryoShow = opt.navbarShowKaryo; }
 
   //Check navbar show search button
-  if(typeof opt.navbarShowSearch !== 'undefined'){ this.navbar.showBtnSearch = opt.navbarShowSearch; }
+  if(typeof opt.navbarShowSearch !== 'undefined'){ this.navbar.btnSearchShow = opt.navbarShowSearch; }
+
+  //Check navbar show help button
+  if(typeof opt.navbarShowHelp !== 'undefined'){ this.navbar.btnHelpShow = opt.navbarShowHelp; }
 
   //For show the tip alert
   if(typeof opt.tipShow !== 'undefined'){ this.alert.tip = opt.tipShow; }

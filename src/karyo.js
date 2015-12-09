@@ -6,6 +6,8 @@ function Karyo(parent_id)
   this.info.name = 'Karyo.js'; //App name
   this.info.version = '1.0.0'; //Version ID
   this.info.web = 'https://jmjuanes.github.io/karyojs'; //App website
+  this.info.repo = 'https://github.com/jmjuanes/karyojs/'; //Repository on GitHub
+  this.info.docs = 'https://github.com/jmjuanes/karyojs/tree/dev/docs'; //Documentation
 
   //Show the welcome on the console
   console.log('Karyo: ' + this.info.name + ' v' + this.info.version);
@@ -35,13 +37,22 @@ function Karyo(parent_id)
   this.navbar.show = true; //Show navbar
   this.navbar.class = 'karyo-navbar'; //Navbar css class
   this.navbar.padding = {"left": 10, "right": 10}; //Navbar padding
-  this.navbar.btnKaryo = 'karyo-navbar-btn karyo-navbar-btn-home'; //Karyotype button css
-  this.navbar.btnSearch = 'karyo-navbar-btn karyo-navbar-btn-search'; //Search button css
-  this.navbar.input = 'karyo-navbar-input'; //Input css class
+  this.navbar.btnKaryo = this.navbar.id + '_karyo'; //Karyo button ID
+  this.navbar.btnKaryoClass = 'karyo-navbar-btn karyo-navbar-btn-home'; //Karyotype button css
+  this.navbar.btnKaryoTitle = 'Return to karyotypes'; //Karyotype button title
+  this.navbar.btnKaryoShow = true; //Karyotype button show
+  this.navbar.btnSearch = this.navbar.id + '_search'; //Search button ID
+  this.navbar.btnSearchClass = 'karyo-navbar-btn karyo-navbar-btn-search'; //Search button css
+  this.navbar.btnSearchTitle = 'Find region'; //Search button title
+  this.navbar.btnSearchShow = true; //Search button show
+  this.navbar.btnHelp = this.navbar.id + '_help'; //Help button ID
+  this.navbar.btnHelpClass = 'karyo-navbar-btn karyo-navbar-btn-help'; //Help button class
+  this.navbar.btnHelpTitle = 'Get help'; //Help button title
+  this.navbar.btnHelpShow = true; //Help button show
+  this.navbar.input = this.navbar.id + '_input'; //Input ID
+  this.navbar.inputClass = 'karyo-navbar-input'; //Input css class
+  this.navbar.inputPlaceholder = 'Find region'; //Input placeholder
   this.navbar.btnLogo = 'karyo-navbar-logo'; //Logo button css
-  this.navbar.showBtnKaryo = true; //Show karyotypes button
-  this.navbar.showBtnSearch = true; //Show search button
-  this.navbar.placeholder = 'Find region'; //Input placeholder
   this.navbar.callbackBackBtn = null; //Go back callback
   this.navbar.callbackSearchBtn = null; //Search btn callback
 
