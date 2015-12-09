@@ -36,13 +36,15 @@
 .karyo-parent { font-family: OpenSans; background-color: #ffffff; }
 
 /* Karyo navbar */
-.karyo-navbar { display: block; background-color: #e6eff4; color: #ffffff; height: 50px; }
+.karyo-navbar { display: table; background-color: #e6eff4; color: #ffffff; height: 50px; }
 .karyo-navbar { line-height: 50px; z-index: 999; border-bottom: 1px solid #ccdde4; }
 
 /* Karyo navbar button */
-.karyo-navbar-btn { display: inline-block; height: 50px; background-repeat: no-repeat; width: 40px; }
-.karyo-navbar-btn { background-position: center center; background-size: 35px 35px; opacity: 0.5; }
-.karyo-navbar-btn:hover { cursor: hand; opacity: 1.0; }
+.karyo-navbar-btn { display: inline-block; height: 30px; background-repeat: no-repeat; width: 30px; }
+.karyo-navbar-btn { background-position: center center; background-size: 30px 30px; opacity: 0.5; }
+.karyo-navbar-btn { border-radius: 5px; margin-top: 10px; margin-left: 5px; margin-right: 5px; }
+.karyo-navbar-btn { border: 0px solid #e6eff4; }
+.karyo-navbar-btn:hover { cursor: hand; opacity: 1.0; background-color: #ffffff; }
 
 /* Karyo navbar button home */
 .karyo-navbar-btn-home { background-image: url('../img/home.svg'); }
@@ -50,15 +52,13 @@
 /* Karyo navbar button search */
 .karyo-navbar-btn-search { background-image: url('../img/search.svg'); }
 
-/*Karyo navbar logo button */
-.karyo-navbar-logo { display: inline-block; float: right; height: 50px; width: 160px; }
-.karyo-navbar-logo { background-repeat: no-repeat; background-position: center center; }
-.karyo-navbar-logo { background-image: url('../img/logo.svg'); }
+/* Karyo navbar button help */
+.karyo-navbar-btn-help { background-image: url('../img/help.svg'); float: right; } 
 
 /* Karyo navbar input */
-.karyo-navbar-input { display: inline-block; height: 28px; width: 200px; background-color: #ffffff; }
-.karyo-navbar-input { color: #6f7887; border: 1px solid #ccdde4; border-radius: 5px; vertical-align: middle; }
-.karyo-navbar-input { margin-top: -41px; margin-left: 1px; margin-right: 1px; font-family: OpenSans; }
+.karyo-navbar-input { display: inline-block; height: 30px; width: 200px; background-color: #ffffff; }
+.karyo-navbar-input { color: #6f7887; border: 1px solid #ccdde4; border-radius: 5px; vertical-align: top; }
+.karyo-navbar-input { margin-top: 10px; margin-left: 1px; margin-right: 1px; font-family: OpenSans; }
 .karyo-navbar-input { line-height: 28px; padding-left: 5px; padding-right: 5px; font-size: 14px; }
 .karyo-navbar-input { outline: 0px; text-align: center; opacity: 0.8; }
 
