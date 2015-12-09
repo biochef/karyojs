@@ -121,7 +121,7 @@ Karyo.prototype.NavbarBtnSearchClick = function()
   }
 
   //Get the region selected
-  var regsel = $('#' + this.navbar.input).text();
+  var regsel = $('#' + this.navbar.input).val();
 
   //Check
   if(regsel && regsel !== '')
@@ -154,44 +154,23 @@ Karyo.prototype.NavbarBtnHelpClick = function()
 //Navbar Home Event
 function KaryoNavbarBtnHomeEvnt(_main)
 {
-  //If click
-  $('#' + _main.navbar.btnKaryo).click(function(e){
-
-    //Prevent default
-    e.preventDefault();
-
-    //Call the Click function
-    _main.NavbarBtnHomeClick();
-
-  });
+  //If user clicks on the karyotypes button
+  $('#' + _main.navbar.btnKaryo).click(function(e){ _main.NavbarBtnHomeClick(); });
 }
 
 //Karyo Navbar Search Event
 function KaryoNavbarBtnSearchEvnt(_main)
 {
-  //If click
-  $('#' + _main.navbar.btnSearch).click(function(e){
+  //If user clicks of search icon
+  $('#' + _main.navbar.btnSearch).click(function(e){ _main.NavbarBtnSearchClick(); });
 
-    //Prevent default
-    e.preventDefault();
-
-    //Call the Click function
-    _main.NavbarBtnSearchClick();
-
-  });
+  //Or user press enter
+  $('#' + _main.navbar.input).keyup(function(e){ if(e.keyCode == 13){ _main.NavbarBtnSearchClick(); } });
 }
 
 //Karyo Navbar Help Event
 function KaryoNavbarBtnHelpEvnt(_main)
 {
-  //If click
-  $('#' + _main.navbar.btnHelp).click(function(e){
-
-    //Prevent default
-    e.preventDefault();
-
-    //Call the Click function
-    _main.NavbarBtnHelpClick();
-
-  });
+  //If user clicks on the help button
+  $('#' + _main.navbar.btnHelp).click(function(e){ _main.NavbarBtnHelpClick(); });
 }
