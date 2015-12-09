@@ -1,16 +1,16 @@
-# Karyo.JS
+# Karyo.js
 
 Chromosomal regions visualizer written in JavaScript.
 
 ## What is it?
 
-**Karyo.JS** is an open source bioinformatic tool for preview defined regions in chromosomes. It can be easily integrated into web applications with a few lines of code in JavaScript.
+**Karyo.js** is an open source bioinformatic tool for preview defined regions in chromosomes. It can be easily integrated into web applications with a few lines of code in JavaScript.
 
 ## Documentation
 
-See the [documentation page](./docs/) for a usage guide, build documentation, and more. 
+See the [documentation page](./docs/) for a usage guide, build documentation, and more.
 
 
 ## License
 
-**Karyo.JS** is under the [MIT LICENSE](LICENSE).
+**Karyo.js** is under the [MIT LICENSE](LICENSE).
