@@ -148,7 +148,7 @@ Karyo.prototype.NavbarBtnSearchClick = function()
 Karyo.prototype.NavbarBtnHelpClick = function()
 {
   //Open the help on a new window
-  
+  window.open(this.info.docs, '_blank');
 }
 
 //Navbar Home Event
