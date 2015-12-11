@@ -1,14 +1,14 @@
 # Build
 
-By default, each version of **Karyo.JS** comes with a `build` folder, where you can find the compiled scripts, images and styles ready for integrate the tool to your web application. Therefore, you can build your own version of the tool following the steps described here.
+By default, each version of **Karyo.JS** comes with a `build` folder, where you can find the compiled scripts, images and styles ready to integrate the tool to your web application. Therefore, you can build your own version of the tool following the steps described here.
 
 ### Requisites
 
-**Karyo.JS** is written in JavaScript and CSS. We use two libraries for make it running: [jQuery](https://jquery.com/) and [SVG.js](http://svgjs.com/). Also, we use [gulp](http://gulpjs.com) for compile and minimize the code, and [NPM](http://npmjs.org) (Node Package Manager) for manage the dependencies.
+**Karyo.JS** is written in JavaScript and CSS. We use two libraries for making it running: [jQuery](https://jquery.com/) and [SVG.js](http://svgjs.com/). Also, we use [gulp](http://gulpjs.com) to compile and minimize the code, and [NPM](http://npmjs.org) (Node Package Manager) for managing the dependencies.
 
 #### Install NPM
 
-**NPM** needs [Node.JS](https://nodejs.org/en/) for run. You can download it from the [Node.JS downloads page](https://nodejs.org/en/download/). The installation also comes with the latest version of NPM.
+**NPM** needs [Node.JS](https://nodejs.org/en/) to run. You can download it from the [Node.JS downloads page](https://nodejs.org/en/download/). The installation also comes with the latest version of NPM.
 
 #### Clone the Karyo.JS repository
 
@@ -33,7 +33,7 @@ npm install
 You might need to install the gulp package globally, run `npm install -g gulp`.
 
 
-### Compile Karyo.JS
+### Compile/build Karyo.JS
 
 Once you have gulp and its dependencies installed, you can run the next command from the root folder of the tool:
 
@@ -41,4 +41,4 @@ Once you have gulp and its dependencies installed, you can run the next command 
 gulp build
 ```
 
-This will compile **Karyo.JS** and place the compiled files into the `build` folder. 
+This will compile **Karyo.JS** and place the compiled files into the `build` folder.
