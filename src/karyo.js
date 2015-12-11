@@ -5,9 +5,9 @@ function Karyo(parent_id)
   this.info = {};
   this.info.name = 'Karyo.js'; //App name
   this.info.version = '1.0.0'; //Version ID
-  this.info.web = 'https://jmjuanes.github.io/karyojs'; //App website
-  this.info.repo = 'https://github.com/jmjuanes/karyojs/'; //Repository on GitHub
-  this.info.docs = 'https://github.com/jmjuanes/karyojs/tree/dev/docs'; //Documentation
+  this.info.web = 'https://biowt.github.io/karyojs'; //App website
+  this.info.repo = 'https://github.com/biowt/karyojs/'; //Repository on GitHub
+  this.info.docs = 'https://github.com/biowt/karyojs/tree/dev/docs'; //Documentation
 
   //Show the welcome on the console
   console.log('Karyo: ' + this.info.name + ' v' + this.info.version);
@@ -93,6 +93,12 @@ function Karyo(parent_id)
   this.chrlist = {};
   this.chrlist.hover = false; //True if mouse is hover the chromosome
   this.chrlist.width = 12; //Chromosome width
+
+  //Chromosome preview regions
+  this.chrpreview = {};
+  this.chrpreview.show = true; //Show preview region
+  this.chrpreview.data = []; //Preview data
+  this.chrpreview.op = 0.8; //Preview region opacity
 
   //Start the chromosome detail info
   this.chrdetail = {};
