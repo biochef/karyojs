@@ -6,8 +6,8 @@
   "author": "Josemi Juanes <josemijuanes@gmail.com>",
   "license": "MIT",
   "files": [],
-  "homepage": "https://jmjuanes.github.io/karyojs",
-  "repository": {"type": "git", "url": "git://github.com/jmjuanes/karyojs.git"},
+  "homepage": "http://biowt.github.io/karyojs",
+  "repository": {"type": "git", "url": "git://github.com/biowt/karyojs.git"},
   "keywords": ["karyo","karyojs","visualizer","javascript"],
   "dependencies": {
     "jquery": "^2.1.4",
