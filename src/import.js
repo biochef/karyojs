@@ -51,12 +51,19 @@ Karyo.prototype.ImportParser = function(type, data, parser)
   //Save the data
   this[type].el = data;
 
-  //Check the data type
+  //Check for specie
   if(type === 'specie')
   {
     //Show the specie by console
     console.log('Karyo: using ' + this.specie.el.name + ' with assembly ' + this.specie.el.assembly);
     console.log('Karyo: detected ' + this.specie.el.chr.length + ' chromosomes');
+  }
+
+  //Check for region
+  if(type === 'region')
+  {
+    //Clear the preview
+    this.chrpreview.data = [];
   }
 
   //Check for draw

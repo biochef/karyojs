@@ -1,6 +1,9 @@
 //Karyo Options
 Karyo.prototype.Options = function(opt)
 {
+  //Check preview regions
+  if(typeof opt.previewRegions !== 'undefined'){ this.chrpreview.show = opt.previewRegions; }
+
   //Check navbar height
   if(typeof opt.navbarHeight !== 'undefined'){ this.navbar.height = opt.navbarHeight; }
 
