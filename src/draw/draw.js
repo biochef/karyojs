@@ -13,6 +13,13 @@ Karyo.prototype.Draw = function()
     //Check if the user is using a region
     if(this.region.use === false || (this.region.use === true && this.region.el))
     {
+      //Check for make the preview
+      if(this.chrpreview.show === true && this.chrpreview.data.length == 0 && this.region.el)
+      {
+        //Make the preview regions
+        this.Preview();
+      }
+
       //Destroy the select
       this.SelectDestroy();
 

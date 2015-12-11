@@ -95,7 +95,36 @@ Karyo.prototype.DrawChrList = function()
     //Set the animation
     obj.svg.animate(time).opacity(1.0);
 
-    //Push
+    //Initialize the preview
+    obj.preview = [];
+
+    //Check for preview the regions
+    if(this.chrpreview.show === true && this.region)
+    {
+      //Add the regions
+      for(var j = 0; j < this.chrpreview.data[i].length; j++)
+      {
+        //Save the region
+        var reg = this.chrpreview.data[i][j];
+
+        //Create the rectangle
+        var robj = this.svg.build.rect(this.svg.draw.chr.width, reg[1] - reg[0]);
+
+        //Move the rectangle
+        robj.attr({x: obj.posx, y: obj.posy + reg[0]});
+
+        //Add the style
+        robj.addClass('karyo-region-bg').opacity(0);
+
+        //Add the animation
+        robj.animate(time).opacity(0.5);
+
+        //Save the regions
+        obj.preview.push(robj);
+      }
+    }
+
+    //Push the object
     this.svg.draw.chrs.push(obj);
 
     //Creates the text
@@ -201,6 +230,13 @@ Karyo.prototype.DrawChrListExit = function(n)
       {
         //Add the animation
         this.svg.draw.centromere[i].poly.animate(time).opacity(0);
+      }
+
+      //Delete all the preview regions
+      for(var j = 0; j < this.svg.draw.chrs[i].preview.length; j++)
+      {
+        //Delete the regions
+        this.svg.draw.chrs[i].preview[j].animate(time).opacity(0);
       }
     }
   }
