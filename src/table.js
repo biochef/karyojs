@@ -116,7 +116,7 @@ Karyo.prototype.TableCreate = function(chr)
         if(this.reglabel.parser !== null)
         {
           //Get the text
-          rinfo[rinfo.length - 1] = this.reglabel.parser(chr, r);
+          rinfo[rinfo.length - 1] = this.reglabel.parser(chr, i);
         }
 
         //Add the new row
@@ -163,6 +163,17 @@ Karyo.prototype.TableRowHover = function(r)
   this.DrawChrDetailLabel(r);
 };
 
+//Karyo Table row click event
+Karyo.prototype.TableRowClick = function(r)
+{
+  //Check the hover region
+  if(this.svg.draw.label)
+  {
+    //Execute the callback
+    this.CallbackRun(this.svg.draw.label.start, this.svg.draw.label.end);
+  }
+};
+
 //Karyo Table destroy
 Karyo.prototype.TableDestroy = function()
 {
@@ -179,6 +190,9 @@ Karyo.prototype.TableDestroy = function()
 //Karyo table hover event
 function KaryoTableRowEvnt(_main, _i)
 {
-  //Add the event
+  //Add the hover event
   $('#rep' + _i).on('mouseover', function(){ _main.TableRowHover(_i); });
+
+  //Add the click event
+  $('#rep' + _i).click(function(e){ _main.TableRowClick(_i); });
 }
