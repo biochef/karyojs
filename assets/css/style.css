@@ -52,8 +52,11 @@
 /* Karyo navbar button search */
 .karyo-navbar-btn-search { background-image: url('../img/search.svg'); }
 
+/* Karyo navbar button table */
+.karyo-navbar-btn-table { background-image: url('../img/table.svg'); }
+
 /* Karyo navbar button help */
-.karyo-navbar-btn-help { background-image: url('../img/help.svg'); float: right; } 
+.karyo-navbar-btn-help { background-image: url('../img/help.svg'); float: right; }
 
 /* Karyo navbar input */
 .karyo-navbar-input { display: inline-block; height: 30px; width: 200px; background-color: #ffffff; }
@@ -65,8 +68,34 @@
 /* Karyo input hover */
 .karyo-navbar-input:hover { opacity: 1.0; }
 
-/* Karyo input placeholder */
-/*.karyo-navbar-input:empty:before { content:attr(data-placeholder); color: #b8c6d6; font-size: 14px; } */
+/* Karyo table */
+.karyo-table { }
+
+/* Karyo table bar */
+.karyo-table-bar { display: block; line-height: 30px; background-color: #f2f6fa; font-weight: normal; }
+.karyo-table-bar { color: #546E7A; font-size: 14px; border-bottom: 1px solid #ccdde4; }
+.karyo-table-bar { border-top: 1px solid #ccdde4; }
+
+/* Karyo table content */
+.karyo-table-cont { background-color: #ffffff; color: #546E7A; font-size: 14px; font-weight: 300; }
+.karyo-table-cont { height: 200px; }
+
+/* Karyo table content empty */
+.karyo-table-cont-empty { height: 50px; text-align: center; line-height: 50px; }
+
+/* Karyo table report */
+.karyo-table-report { display: block; width: 100%; height: 100%; overflow-y: auto; overflow-x: hidden; }
+
+/* Karyo table report row */
+.karyo-table-report-row { display: block; width: calc(100% - 20px); height: 30px; line-height: 30px; }
+.karyo-table-report-row { padding-left: 10px; padding-right: 10px; border-bottom: 1px solid #d6e1e9; }
+
+/* Haryo table report row hover */
+.karyo-table-report-row-hover { cursor: hand; }
+.karyo-table-report-row-hover:hover { background-color: #f2f6f8; }
+
+/* Karyo table report col */
+.karyo-table-report-col { display: inline-block; float: left; }
 
 /* Karyo footer */
 .karyo-foot { display: block; background-color: #f2f6fa; color: #546E7A; font-size: 14px; }
