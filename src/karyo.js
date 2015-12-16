@@ -15,7 +15,7 @@ function Karyo(parent_id)
 
   //Start the default values
   this.default = {};
-  this.default.size = {'width': '100%', 'height': '330px'}; //Default width and height
+  this.default.size = {'width': '100%', 'height': '250px'}; //Default width and height
   this.default.svg = {'width': '100%', 'height': '100%'}; //Default svg width and size
   this.default.img = 'img/'; //Images folder
 
@@ -45,6 +45,10 @@ function Karyo(parent_id)
   this.navbar.btnSearchClass = 'karyo-navbar-btn karyo-navbar-btn-search'; //Search button css
   this.navbar.btnSearchTitle = 'Find region'; //Search button title
   this.navbar.btnSearchShow = true; //Search button show
+  this.navbar.btnTable = this.navbar.id + '_table'; //Table button ID
+  this.navbar.btnTableClass = 'karyo-navbar-btn karyo-navbar-btn-table'; //Table button css
+  this.navbar.btnTableTitle = 'Open/close table with all the regions'; //Table button title
+  this.navbar.btnTableShow = true; //Table button show
   this.navbar.btnHelp = this.navbar.id + '_help'; //Help button ID
   this.navbar.btnHelpClass = 'karyo-navbar-btn karyo-navbar-btn-help'; //Help button class
   this.navbar.btnHelpTitle = 'Get help'; //Help button title
@@ -234,6 +238,45 @@ function Karyo(parent_id)
 
   //Project status
   this.status = null;
+
+  //Table track
+  this.table = {};
+  this.table.id = this.parent.id + '_table'; //Table ID
+  this.table.class = 'karyo-table'; //Table class
+  this.table.active = true; //Table active
+  this.table.show = true; //Table show report
+  this.table.width = '100%'; //Table width
+  this.table.height = 0; //Table height
+
+  //Table bar
+  this.tablebar = {};
+  this.tablebar.id = this.table.id + '_bar'; //Table bar ID
+  this.tablebar.class = 'karyo-table-bar'; //Table bar class
+  this.tablebar.width = '100%'; //Table bar width
+  this.tablebar.height = 30; //Table bar height
+  this.tablebar.title = 'Regions report'; //Table bar title
+  this.tablebar.padding = {left: 10, right: 10}; //Table bar padding
+
+  //Table content
+  this.tablecont = {};
+  this.tablecont.id = this.table.id + '_cont'; //Table content ID
+  this.tablecont.class = 'karyo-table-cont'; //Table content class
+  this.tablecont.width = '100%'; //Table content width
+  this.tablecont.height = '200px'; //Table content height
+  this.tablecont.empty = 'karyo-table-cont-empty'; //Table empty class
+
+  //Table report
+  this.tablereport = {};
+  this.tablereport.class= 'karyo-table-report'; //Table report class
+  this.tablereport.row = 'karyo-table-report-row'; //Table report row
+  this.tablereport.hover = 'karyo-table-report-row-hover'; //Table report row hover
+  this.tablereport.col = 'karyo-table-report-col'; //Table report col
+
+  //Table cols
+  this.tablecols = {};
+  this.tablecols.names = ['<b>Chr</b>','<b>Start</b>','<b>End</b>',' ']; //Cols names
+  this.tablecols.width = ['50px','150px','150px','calc(90% - 350px)']; //Cols width
+  this.tablecols.align = ['right', 'right', 'right', 'right']; //Col align
 
   //Karyo Build Time out
   KaryoBuildTimeOut(this);
