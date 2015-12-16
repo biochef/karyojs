@@ -3,7 +3,7 @@ Karyo.prototype.Resize = function()
 {
   //Save the parent size
   this.parent.width = $('#' + this.parent.id).width();
-  this.parent.height = $('#' + this.parent.id).height();
+  //this.parent.height = $('#' + this.parent.id).height();
 
   //Save the navbar size
   this.navbar.width = $('#' + this.navbar.id).width();
@@ -16,6 +16,14 @@ Karyo.prototype.Resize = function()
   //Save the svg size
   this.svg.width = $('#' + this.svg.id).width();
   this.svg.height = $('#' + this.svg.id).height();
+
+  //Save the tablebar size
+  this.tablebar.width = $('#' + this.tablebar.id).width();
+  this.tablebar.height = $('#' + this.tablebar.id).height();
+
+  //Save the tablecont size
+  this.tablecont.width = $('#' + this.tablecont.id).width();
+  this.tablecont.height = $('#' + this.tablecont.id).height();
 
   //Save the foot size
   this.foot.width = $('#' + this.foot.id).width();
