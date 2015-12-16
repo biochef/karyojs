@@ -16,6 +16,9 @@ Karyo.prototype.Build = function()
   //Append the alert
   $('#' + this.parent.id).append(this.AlertBuild());
 
+  //Append the table report
+  $('#' + this.parent.id).append(this.TableBuild());
+
   //Append the foot
   $('#' + this.parent.id).append(this.FootBuild());
 
