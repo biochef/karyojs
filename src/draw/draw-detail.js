@@ -230,6 +230,9 @@ Karyo.prototype.DrawChrDetail = function(n)
   //Change the location
   this.status = 'detail';
 
+  //Show the table report
+  this.TableCreate(this.svg.draw.chr.id);
+
   //Show in console
   console.log('Karyo: opening chromosome ' + this.svg.draw.chr.id);
 };
