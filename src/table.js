@@ -77,6 +77,9 @@ Karyo.prototype.TableCreate = function(chr)
   //Create the new div
   var div = 'No region for this chromosome...';
 
+  //For check if regions has added
+  var regionsOk = false;
+
   //Check if regions is defined
   if(this.region)
   {
@@ -88,6 +91,9 @@ Karyo.prototype.TableCreate = function(chr)
     {
       //Remove the empty class
       $('#' + this.tablecont.id).removeClass(this.tablecont.empty);
+
+      //Set as true
+      regionsOk = true;
 
       //Initialize the table
       div = '<div class="' + this.tablereport.class + '">';
@@ -114,7 +120,10 @@ Karyo.prototype.TableCreate = function(chr)
         }
 
         //Add the new row
-        div = div + '<div class="' + this.tablereport.row + ' ' + this.tablereport.hover + '" id="rep' + i + '">';
+        div = div + '<div class="' + this.tablereport.row + ' ' + this.tablereport.hover + '" ';
+
+        //Add the row ID
+        div = div + 'id="rep' + i + '">';
 
         //Add the row content
         div = div + this.TableRowsMaker(rinfo);
@@ -130,6 +139,28 @@ Karyo.prototype.TableCreate = function(chr)
 
   //Show the new table
   $('#' + this.tablecont.id).html(div);
+
+  //Check for add the events
+  if(regionsOk === true)
+  {
+    //Add the regions events
+    for(var i = 0; i < this.region.el[r].regions.length; i++)
+    {
+      //Add the event for hover and click
+      KaryoTableRowEvnt(this, i);
+    }
+  }
+
+};
+
+//Karyo Table row hover event
+Karyo.prototype.TableRowHover = function(r)
+{
+  //Destroy the last label
+  this.DrawChrDetailLabelDestroy();
+
+  //Create the new
+  this.DrawChrDetailLabel(r);
 };
 
 //Karyo Table destroy
@@ -144,3 +175,10 @@ Karyo.prototype.TableDestroy = function()
   //Add the empty class
   $('#' + this.tablecont.id).addClass(this.tablecont.empty);
 };
+
+//Karyo table hover event
+function KaryoTableRowEvnt(_main, _i)
+{
+  //Add the event
+  $('#rep' + _i).on('mouseover', function(){ _main.TableRowHover(_i); });
+}
