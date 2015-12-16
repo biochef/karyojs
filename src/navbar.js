@@ -44,7 +44,20 @@ Karyo.prototype.NavbarBuild = function()
     div = div + '></div>';
   }
 
-  //Create the Karyo logo
+  //Create the table button
+  if(this.navbar.btnTableShow === true)
+  {
+    //Create the div for the help button
+    div = div + '<div class="' + this.navbar.btnTableClass + '" id="' + this.navbar.btnTable + '"';
+
+    //Add the title
+    div = div + 'title="' + this.navbar.btnTableTitle + '"';
+
+    //Close the button div
+    div = div + '></div>';
+  }
+
+  //Create the help button
   if(this.navbar.btnHelpShow === true)
   {
     //Create the div for the help button
@@ -72,6 +85,9 @@ Karyo.prototype.NavbarEvnt = function()
 
   //Start the navbar search button
   KaryoNavbarBtnSearchEvnt(this);
+
+  //Start the navbar table button
+  KaryoNavbarBtnTableEvnt(this);
 
   //Start the navbar help button
   KaryoNavbarBtnHelpEvnt(this);
@@ -144,6 +160,13 @@ Karyo.prototype.NavbarBtnSearchClick = function()
   }
 };
 
+//Karyo Table button click
+Karyo.prototype.NavbarBtnTableClick = function()
+{
+  //Show/Hide the table
+  this.TableOpenClose();
+}
+
 //Karyo Help button click
 Karyo.prototype.NavbarBtnHelpClick = function()
 {
@@ -166,6 +189,13 @@ function KaryoNavbarBtnSearchEvnt(_main)
 
   //Or user press enter
   $('#' + _main.navbar.input).keyup(function(e){ if(e.keyCode == 13){ _main.NavbarBtnSearchClick(); } });
+}
+
+//Navbar Table Event
+function KaryoNavbarBtnTableEvnt(_main)
+{
+  //If user clicks on the karyotypes button
+  $('#' + _main.navbar.btnTable).click(function(e){ _main.NavbarBtnTableClick(); });
 }
 
 //Karyo Navbar Help Event
