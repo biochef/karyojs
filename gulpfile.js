@@ -25,7 +25,7 @@ var output = 'build/';
 var files = ['src/karyo.js', 'src/build.js', 'src/callback.js', 'src/cursor.js', 'src/foot.js', 'src/get.js',
 'src/import.js', 'src/navbar.js', 'src/resize.js', 'src/select.js', 'src/size.js', 'src/use.js', 'src/options.js',
 'src/utils.js', 'src/loading.js', 'src/alert.js', 'src/preview.js', 'src/draw/*.js', 'src/events/*.js',
-'src/plugins/*.js'];
+'src/plugins/*.js', 'src/table.js'];
 
 //Concat all files in build folder
 gulp.task('concat', function(){
