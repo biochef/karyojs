@@ -202,6 +202,9 @@ Karyo.prototype.DrawChrList = function()
 
   //Change the location
   this.status = 'list';
+
+  //Destroy the table
+  this.TableDestroy();
 };
 
 //Exit from chromosome list
