@@ -153,8 +153,8 @@ Karyo.prototype.TableCreate = function(chr)
 
 };
 
-//Karyo Table row hover event
-Karyo.prototype.TableRowHover = function(r)
+//Karyo Table row over event
+Karyo.prototype.TableRowOver = function(r)
 {
   //Destroy the last label
   this.DrawChrDetailLabelDestroy();
@@ -191,7 +191,7 @@ Karyo.prototype.TableDestroy = function()
 function KaryoTableRowEvnt(_main, _i)
 {
   //Add the hover event
-  $('#rep' + _i).on('mouseover', function(){ _main.TableRowHover(_i); });
+  $('#rep' + _i).on('mouseover', function(){ _main.TableRowOver(_i); });
 
   //Add the click event
   $('#rep' + _i).click(function(e){ _main.TableRowClick(_i); });
