@@ -90,9 +90,9 @@
 .karyo-table-report-row { display: block; width: calc(100% - 20px); height: 30px; line-height: 30px; }
 .karyo-table-report-row { padding-left: 10px; padding-right: 10px; border-bottom: 1px solid #d6e1e9; }
 
-/* Haryo table report row hover */
-.karyo-table-report-row-hover { cursor: hand; }
-.karyo-table-report-row-hover:hover { background-color: #f2f6f8; }
+/* Haryo table report row over */
+.karyo-table-report-row-over { cursor: hand; }
+.karyo-table-report-row-over:hover { background-color: #f2f6f8; }
 
 /* Karyo table report col */
 .karyo-table-report-col { display: inline-block; float: left; }
