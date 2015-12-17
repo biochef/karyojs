@@ -269,7 +269,7 @@ function Karyo(parent_id)
   this.tablereport = {};
   this.tablereport.class= 'karyo-table-report'; //Table report class
   this.tablereport.row = 'karyo-table-report-row'; //Table report row
-  this.tablereport.hover = 'karyo-table-report-row-hover'; //Table report row hover
+  this.tablereport.over = 'karyo-table-report-row-over'; //Table report row over
   this.tablereport.col = 'karyo-table-report-col'; //Table report col
 
   //Table cols
