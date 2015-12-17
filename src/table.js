@@ -120,7 +120,7 @@ Karyo.prototype.TableCreate = function(chr)
         }
 
         //Add the new row
-        div = div + '<div class="' + this.tablereport.row + ' ' + this.tablereport.hover + '" ';
+        div = div + '<div class="' + this.tablereport.row + ' ' + this.tablereport.over + '" ';
 
         //Add the row ID
         div = div + 'id="rep' + i + '">';
@@ -146,7 +146,7 @@ Karyo.prototype.TableCreate = function(chr)
     //Add the regions events
     for(var i = 0; i < this.region.el[r].regions.length; i++)
     {
-      //Add the event for hover and click
+      //Add the event for over and click
       KaryoTableRowEvnt(this, i);
     }
   }
@@ -166,7 +166,7 @@ Karyo.prototype.TableRowOver = function(r)
 //Karyo Table row click event
 Karyo.prototype.TableRowClick = function(r)
 {
-  //Check the hover region
+  //Check the over region
   if(this.svg.draw.label)
   {
     //Execute the callback
@@ -187,10 +187,10 @@ Karyo.prototype.TableDestroy = function()
   $('#' + this.tablecont.id).addClass(this.tablecont.empty);
 };
 
-//Karyo table hover event
+//Karyo table over event
 function KaryoTableRowEvnt(_main, _i)
 {
-  //Add the hover event
+  //Add the over event
   $('#rep' + _i).on('mouseover', function(){ _main.TableRowOver(_i); });
 
   //Add the click event
