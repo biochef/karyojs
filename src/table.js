@@ -1,8 +1,70 @@
+//Karyo Table options
+Karyo.prototype.TableOpt = function(opt)
+{
+  //Check for table title
+  if(typeof opt.title !== 'undefined'){ this.tablebar.title = opt.title; }
+
+  //Check for table cols parser
+  if(typeof opt.parser !== 'undefined'){ this.tablecols.parser = opt.parser; }
+
+  //Check for table cols names
+  if(typeof opt.colsName !== 'undefined')
+  {
+    //Save the number of columns
+    this.tablecols.num = opt.colsName.length;
+
+    //Save the array
+    this.tablecols.names = opt.colsName;
+  }
+
+  //Check for table cols width
+  if(typeof opt.colsWidth !== 'undefined')
+  {
+    //Check the number
+    if(opt.colsWidth.length != this.tablecols.num)
+    {
+      //Show Error
+      console.error('Karyo: error in Table Options, number of width cols is not the same.');
+    }
+    else
+    {
+      //Save the array
+      this.tablecols.widtl = opt.colsWidth;
+    }
+  }
+
+  //Check for cols align
+  if(typeof opt.colsAlign !== 'undefined')
+  {
+    //Check the number
+    if(opt.colsAlign.length != this.tablecols.num)
+    {
+      //Show Error
+      console.error('Karyo: error in Table Options, number of align cols is not the same.');
+    }
+    else
+    {
+      //Save the array
+      this.tablecols.align = opt.colsAlign;
+    }
+  }
+};
+
 //Karyo Table report builder
 Karyo.prototype.TableBuild = function()
 {
+  //Initialize the show table
+  var show = '';
+
+  //Check for show the report table
+  if(this.table.show === false)
+  {
+    //Hide the table report
+    show = 'style="display: none;"';
+  }
+
   //Initialize the table div
-  var div = '<div id="' + this.table.id + '" class="' + this.table.class + '">';
+  var div = '<div id="' + this.table.id + '" class="' + this.table.class + '" ' + show + '>';
 
   //Create the bar
   div = div + '<div id="' + this.tablebar.id + '" class="' + this.tablebar.class + '">';
@@ -48,17 +110,53 @@ Karyo.prototype.TableOpenClose = function()
 //Karyo table build the rows
 Karyo.prototype.TableRowsMaker = function(c)
 {
+  //Check for the header
+  if(typeof c === 'undefined')
+  {
+    //Set c as the header
+    c = this.tablecols.names;
+
+    //Change the header style
+    for(var i = 0; i < c.length; i++)
+    {
+      //Add the bold tag
+      c[i] = '<b>' + c[i] + '</b>';
+    }
+  }
+
   //Initialize the div
   var d = '';
+
+  //Default width
+  var cwidth = 100/c.length;
 
   //Read all
   for(var i = 0; i < c.length; i++)
   {
-    //Initialize the col
-    d = d + '<div class="' + this.tablereport.col + '" ';
+    //Initialize the column style
+    var cstyle = '';
 
-    //Add the style
-    d = d + 'style="width:' + this.tablecols.width[i] + ';text-align:' + this.tablecols.align[i] + ';">';
+    //Check the col width
+    if(this.tablecols.width.length == this.tablecols.num)
+    {
+      //Add the width style
+      cstyle = 'width:' + this.tablecols.width[i] + ';';
+    }
+    else
+    {
+      //Add the default width
+      cstyle = 'width:' + cwidth + '%;';
+    }
+
+    //Check the col align
+    if(this.tablecols.align.length == this.tablecols.num)
+    {
+      //Add the text align
+      cstyle = cstyle + 'text-align:' + this.tablecols.align[i] + ';';
+    }
+
+    //Initialize the col
+    d = d + '<div class="' + this.tablereport.col + '" style="' + cstyle + '">';
 
     //Add the col content
     d = d + c[i];
@@ -99,9 +197,7 @@ Karyo.prototype.TableCreate = function(chr)
       div = '<div class="' + this.tablereport.class + '">';
 
       //Add the header
-      div = div + '<div class="' + this.tablereport.row + '">';
-      div = div + this.TableRowsMaker(this.tablecols.names);
-      div = div + '</div>';
+      div = div + '<div class="' + this.tablereport.row + '">' + this.TableRowsMaker() + '</div>';
 
       //Add the regions
       for(var i = 0; i < this.region.el[r].regions.length; i++)
@@ -109,14 +205,19 @@ Karyo.prototype.TableCreate = function(chr)
         //Save the region
         var re = this.region.el[r].regions[i];
 
-        //Array with the row info
+        //Array with the default row
         var rinfo = [chr, re.start, re.end, '-'];
 
-        //Check for custom label
-        if(this.reglabel.parser !== null)
+        //Check for custom table parser
+        if(this.tablecols.parser !== null)
         {
-          //Get the text
-          rinfo[rinfo.length - 1] = this.reglabel.parser(chr, i);
+          //Call the custom parser
+          rinfo = this.tablecols.parser(chr, re);
+        }
+        else if(this.reglabel.parser !== null)
+        {
+          //Save the custom label
+          rinfo[3] = this.reglabel.parser(chr, this.region.el[r].regions, i);
         }
 
         //Add the new row
