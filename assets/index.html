@@ -53,12 +53,14 @@
         //tipShow: true,
         //tipText: 'You can personalize the tip message!',
         //selectMax: -1,
-        //selectEnabled: true
+        //selectEnabled: true,
+        //showTable: false
       });
 
       //Labels
       k.UseLabel({
-        chromosome: function(chr){
+        chromosome: function(chr)
+        {
           //Get the regions for this chromosome
           var regs = k.GetRegionsByChr(chr);
 
@@ -68,12 +70,23 @@
           //Return default
           return '0 positions';
         },
-        region: function(chr, reg){
-          //Get the regions for this chromosome
-          var regs = k.GetRegionsByChr(chr);
-
+        region: function(chr, region)
+        {
           //Return the label
-          return '' + regs[reg].label + ' reads';
+          return '' + region.label + ' reads';
+        }
+      });
+
+      //Report table
+      k.TableOpt({
+        title: 'Regions report',
+        colsName: ['Chr','Start','End','Label'],
+        //colsWidth: [],
+        //colsAlign: [],
+        parser: function(chr, region)
+        {
+          //Return the default row
+          return [chr, region.start, region.end, region.label + ' reads'];
         }
       });
 

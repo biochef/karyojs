@@ -82,7 +82,8 @@
 
       //Labels
       k.UseLabel({
-        chromosome: function(chr){
+        chromosome: function(chr)
+        {
           //Get the regions for this chromosome
           var regs = k.GetRegionsByChr(chr);
 
@@ -92,9 +93,10 @@
           //Return default
           return '0 positions';
         },
-        region: function(chr, regions, index){
+        region: function(chr, region)
+        {
           //Return the label
-          return '' + regions[index].label + ' reads';
+          return '' + region.label + ' reads';
         }
       });
 
@@ -104,7 +106,8 @@
         colsName: ['Chr','Start','End','Label'],
         //colsWidth: [],
         //colsAlign: [],
-        parser: function(chr, region){
+        parser: function(chr, region)
+        {
           //Return the default row
           return [chr, region.start, region.end, region.label + ' reads'];
         }
