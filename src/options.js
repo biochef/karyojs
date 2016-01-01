@@ -30,4 +30,7 @@ Karyo.prototype.Options = function(opt)
 
   //Select enabled
   if(typeof opt.selectEnabled !== 'undefined'){ this.select.enabled = opt.selectEnabled; }
+
+  //Show report table
+  if(typeof opt.showTable !== 'undefined'){ this.table.show = opt.showTable; } 
 };
