@@ -398,10 +398,10 @@ Karyo.prototype.DrawChrDetailLabel = function(n)
     if(this.reglabel.parser !== null)
     {
       //Get the region object
-      var robj = this.GetRegionsByChr(this.svg.draw.chr.id);
+      var robj = this.GetRegionsByChr(this.svg.draw.chr.id)[this.svg.draw.label.num];
 
       //Get the text
-      var txt = this.reglabel.parser(this.svg.draw.chr.id, robj, this.svg.draw.label.num);
+      var txt = this.reglabel.parser(this.svg.draw.chr.id, robj);
 
       //Create the text
       this.svg.draw.label.text2 = this.svg.build.text(txt);
