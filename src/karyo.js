@@ -244,7 +244,7 @@ function Karyo(parent_id)
   this.table.id = this.parent.id + '_table'; //Table ID
   this.table.class = 'karyo-table'; //Table class
   this.table.active = true; //Table active
-  this.table.show = true; //Table show report
+  this.table.show = false; //Table show report
   this.table.width = '100%'; //Table width
   this.table.height = 0; //Table height
 
@@ -274,9 +274,11 @@ function Karyo(parent_id)
 
   //Table cols
   this.tablecols = {};
-  this.tablecols.names = ['<b>Chr</b>','<b>Start</b>','<b>End</b>',' ']; //Cols names
-  this.tablecols.width = ['50px','150px','150px','calc(90% - 350px)']; //Cols width
-  this.tablecols.align = ['right', 'right', 'right', 'right']; //Col align
+  this.tablecols.num = 4; //Number of columns
+  this.tablecols.names = ['Chr','Start','End','Label']; //Cols names
+  this.tablecols.width = []; //Cols width
+  this.tablecols.align = ['center', 'right', 'right', 'right']; //Cols align
+  this.tablecols.parser = null; //Cols parser
 
   //Karyo Build Time out
   KaryoBuildTimeOut(this);
