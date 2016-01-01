@@ -45,7 +45,7 @@ Karyo.prototype.NavbarBuild = function()
   }
 
   //Create the table button
-  if(this.navbar.btnTableShow === true)
+  if(this.navbar.btnTableShow === true && this.table.show === true)
   {
     //Create the div for the help button
     div = div + '<div class="' + this.navbar.btnTableClass + '" id="' + this.navbar.btnTable + '"';
