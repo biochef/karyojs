@@ -7,7 +7,12 @@ function Karyo(parent_id)
   this.info.version = '1.0.0'; //Version ID
   this.info.web = 'https://biowt.github.io/karyojs'; //App website
   this.info.repo = 'https://github.com/biowt/karyojs/'; //Repository on GitHub
-  this.info.docs = 'https://github.com/biowt/karyojs/tree/dev/docs'; //Documentation
+  this.info.docs = 'https://github.com/biowt/karyojs/wiki'; //Documentation
+
+  //Database
+  this.db = {};
+  this.db.version = 'v1'; //Database version
+  this.db.url = 'https://raw.githubusercontent.com/biowt/karyojs-species/{version}/{specie}.json';
 
   //Show the welcome on the console
   console.log('Karyo: ' + this.info.name + ' v' + this.info.version);
