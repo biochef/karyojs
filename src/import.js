@@ -1,15 +1,31 @@
 //Karyo Import Chromosomes list
-Karyo.prototype.ImportChrs = function(source, parser)
+Karyo.prototype.ImportChrs = function(opt)
 {
+  //Check if user has set import from the Karyo database
+  if(typeof opt.fromDB !== 'undefined')
+  {
+    //Convert to lower case
+    opt.fromDB = opt.fromDB.toLowerCase();
+
+    //User has set load chromosomes from database. Replace the specie
+    opt.url = this.db.url.replace('{specie}', opt.fromDB);
+
+    //Replace the database version
+    opt.url = opt.url.replace('{version}', this.db.version);
+
+    //Make the paser as null
+    opt.parser = null;
+  }
+
   //Call to the Import
-  this.Import('specie', source, parser);
+  this.Import('specie', opt.url, opt.parser);
 };
 
 //Karyo Import Regions
-Karyo.prototype.ImportRegions = function(source, parser)
+Karyo.prototype.ImportRegions = function(opt)
 {
   //Call to the Import
-  this.Import('region', source, parser);
+  this.Import('region', opt.url, opt.parser);
 };
 
 //Karyo Import from url
