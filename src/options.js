@@ -16,6 +16,9 @@ Karyo.prototype.Options = function(opt)
   //Check navbar show search button
   if(typeof opt.navbarShowSearch !== 'undefined'){ this.navbar.btnSearchShow = opt.navbarShowSearch; }
 
+  //Check navbar show table button
+  if(typeof opt.navbarShowTable !== 'undefined'){ this.navbar.btnTableShow = opt.navbarShowTable; } 
+
   //Check navbar show help button
   if(typeof opt.navbarShowHelp !== 'undefined'){ this.navbar.btnHelpShow = opt.navbarShowHelp; }
 
@@ -32,5 +35,5 @@ Karyo.prototype.Options = function(opt)
   if(typeof opt.selectEnabled !== 'undefined'){ this.select.enabled = opt.selectEnabled; }
 
   //Show report table
-  if(typeof opt.showTable !== 'undefined'){ this.table.show = opt.showTable; } 
+  if(typeof opt.showTable !== 'undefined'){ this.table.show = opt.showTable; }
 };
