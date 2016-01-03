@@ -117,7 +117,7 @@ Karyo.prototype.DrawChrList = function()
         robj.addClass('karyo-region-bg').opacity(0);
 
         //Add the animation
-        robj.animate(time).opacity(0.5);
+        robj.animate(time).opacity(this.chrpreview.op);
 
         //Save the regions
         obj.preview.push(robj);
