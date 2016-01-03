@@ -164,7 +164,7 @@ Karyo.prototype.NavbarBtnSearchClick = function()
 Karyo.prototype.NavbarBtnTableClick = function()
 {
   //Show/Hide the table
-  this.TableOpenClose();
+  this.TableShowHide();
 }
 
 //Karyo Help button click
