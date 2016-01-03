@@ -27,8 +27,8 @@
 .karyo-anim { margin-right: auto; margin-top: 0px; text-indent: -9999em; font-size: 10px; }
 
 /* Load animation */
-@keyframes load { 0%, 80%, 100% { background-color: #FF1744; } }
-@keyframes load { 40% { background-color: #FF1744; } }
+@keyframes load { 0%, 80%, 100% { background-color: #ed321f; } }
+@keyframes load { 40% { background-color: #ed321f; } }
 
 
 /* Karyo parent */
@@ -36,7 +36,7 @@
 .karyo-parent { font-family: OpenSans; background-color: #ffffff; }
 
 /* Karyo navbar */
-.karyo-navbar { display: table; background-color: #e6eff4; color: #ffffff; height: 50px; }
+.karyo-navbar { display: table; background-color: #e3eaf3; color: #ffffff; height: 50px; }
 .karyo-navbar { line-height: 50px; z-index: 999; border-bottom: 1px solid #ccdde4; }
 
 /* Karyo navbar button */
@@ -52,8 +52,11 @@
 /* Karyo navbar button search */
 .karyo-navbar-btn-search { background-image: url('../img/search.svg'); }
 
+/* Karyo navbar button table */
+.karyo-navbar-btn-table { background-image: url('../img/table.svg'); }
+
 /* Karyo navbar button help */
-.karyo-navbar-btn-help { background-image: url('../img/help.svg'); float: right; } 
+.karyo-navbar-btn-help { background-image: url('../img/help.svg'); float: right; }
 
 /* Karyo navbar input */
 .karyo-navbar-input { display: inline-block; height: 30px; width: 200px; background-color: #ffffff; }
@@ -65,12 +68,45 @@
 /* Karyo input hover */
 .karyo-navbar-input:hover { opacity: 1.0; }
 
-/* Karyo input placeholder */
-/*.karyo-navbar-input:empty:before { content:attr(data-placeholder); color: #b8c6d6; font-size: 14px; } */
+/* Karyo table */
+.karyo-table { background-color: #ffffff; color: #546E7A; font-size: 14px; font-weight: 300; }
+
+/* Karyo table display */
+.karyo-table-display { height: 200px; }
+
+/* Karyo table empty */
+.karyo-table-empty { height: 50px; text-align: center; line-height: 50px; }
+
+/* Karyo table head */
+.karyo-table-head { border-bottom: 0px solid #ccdde4; padding-right: 20px !important; font-weight: bold; }
+.karyo-table-head { width: calc(100% - 30px) !important; height: 40px !important; font-size: 13px; }
+.karyo-table-head { line-height: 40px !important; background-color: #e3eaf3 !important; }
+
+/* Karyo table content */
+.karyo-table-content { display: block; height: 160px; width: 100%; }
+.karyo-table-content { overflow-y: auto; overflow-x: hidden; }
+
+/* Karyo table row */
+.karyo-table-row { display: block; width: calc(100% - 20px); height: 35px; line-height: 35px; }
+.karyo-table-row { padding-left: 10px; padding-right: 10px; background-color: #f2f6fa; }
+.karyo-table-row:nth-child(even) { background-color: #e8edf4; }
+
+/* Karyo table row over */
+.karyo-table-row-over { cursor: hand; }
+.karyo-table-row-over:hover { background-color: #B3E5FC; }
+
+/* Karyo table col */
+.karyo-table-col { display: inline-block; float: left; }
+
+/* Karyo table col open */
+.karyo-table-open { display: block; float: right; margin-right: 10px; width: 80px; height: 20px; color: #ffffff; }
+.karyo-table-open { margin-top: 7px; line-height: 18px !important; text-align: center; font-size: 12px; }
+.karyo-table-open { border-radius: 5px; background-color: #b8c6d6; transition: all 0.3s; }
+.karyo-table-row-over:hover .karyo-table-open { background-color: #ed321f; }
 
 /* Karyo footer */
-.karyo-foot { display: block; background-color: #f2f6fa; color: #546E7A; font-size: 14px; }
-.karyo-foot { border-top: 1px solid #ebf1fa; font-weight: normal; }
+.karyo-foot { display: block; background-color: #e3eaf3; color: #546E7A; font-size: 14px; }
+.karyo-foot { font-weight: normal; border-top: 1px solid #ccdde4; }
 
 /* Karyo foot position */
 .karyo-foot-pos { display: inline-block; height: 30px; line-height: 26px; color: #546E7A; }
@@ -81,7 +117,7 @@
 
 /* Karyo foot logo */
 .karyo-foot-logo { display: inline-block; height: 30px; line-height: 30px; float: right; font-weight: bold; }
-.karyo-foot-logo { text-decoration: none; color: #F50057; line-height: 26px; opacity: 0.6; }
+.karyo-foot-logo { text-decoration: none; color: #ed321f; line-height: 26px; opacity: 0.6; }
 .karyo-foot-logo:hover { opacity: 1.0; }
 
 /* Karyo Powered by */
@@ -89,28 +125,28 @@
 .karyo-foot-powered { padding-right: 5px; color: #546E7A; }
 
 /* Karyo chromosome */
-.karyo-chr { stroke: #2962FF; fill: #E3F2FD; }
+.karyo-chr { stroke: #00B0FF; fill: #ecf6fd; stroke-width: 1.5px; }
 
 /* Karyo hover box */
-.karyo-hover { fill: #2979FF; }
+.karyo-hover { fill: #00B0FF; }
 
 /* Karyo label box */
-.karyo-label { fill: #FF1744; }
+.karyo-label { fill: #ed321f; }
 
 /* Karyo centromere */
-.karyo-centromere { fill: #2962FF; }
+.karyo-centromere { fill: #00B0FF; }
 .karyo-centromere-bg { fill: #ffffff; }
 
 /* Karyo region */
-.karyo-region { stroke: #FF1744; stroke-width: 1; }
-.karyo-region-bg { fill: #FF1744; }
+.karyo-region { stroke: #ed321f; stroke-width: 1; }
+.karyo-region-bg { fill: #ed321f; }
 
 /* Karyo selected region */
-.karyo-select { stroke: #4CAF50; stroke-width: 3; }
-.karyo-select-bg { fill: #4CAF50; }
+.karyo-select { stroke: #67ba2f; stroke-width: 3; }
+.karyo-select-bg { fill: #67ba2f; }
 
 /* Karyo select label */
-.karyo-selectlabel { fill: #4CAF50; }
+.karyo-selectlabel { fill: #67ba2f; }
 
 /* Karyo title */
 .karyo-title { fill: #ffffff; }
@@ -121,7 +157,7 @@
 /* Karyo alerts */
 .karyo-alert-cont { display: block; position: relative; border-radius: 5px; font-family: OpenSans; }
 .karyo-alert-cont { color: #546E7A; font-weight: normal; z-index: 99; transition: all 0.3s; }
-.karyo-alert-cont { background-repeat: no-repeat; background-color: #ECEFF1; line-height: 30px; }
+.karyo-alert-cont { background-repeat: no-repeat; background-color: #f2f6fa; line-height: 30px; }
 .karyo-alert-cont { font-size: 14px; background-size: 18px 18px; background-position: 10px 6px; }
 
 /* Karyo alert error */

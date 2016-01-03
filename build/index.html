@@ -27,11 +27,34 @@
       //Create the new Karyo element
       k = new Karyo('karyo_div');
 
-      //Import the chromosomes list
-      k.ImportChrs('../../examples/species/human.json');
+      //Options for Karyo
+      k.Options({
+        //previewRegions: true,
+        //navbarHeight: 50,
+        //navbarShow: true,
+        //navbarShowKaryo: true,
+        //navbarShowSearch: true,
+        //navbarShowTable: true,
+        //navbarShowHelp: true,
+        //tipShow: true,
+        //tipText: 'You can personalize the tip message!',
+        //selectMax: -1,
+        //selectEnabled: true,
+        //showTable: true
+      });
 
-      //Import your regions data
-      k.ImportRegions('../../examples/data.json');
+      //Use the Human test specie from local
+      k.ImportChrs({ fromDB: 'hsapiens/grch38' });
+
+      //Use the human test data
+      k.ImportRegions({
+        url: '../../examples/data.json',
+        parser: function(regions)
+        {
+          //Return the regions
+          return regions;
+        }
+      });
 
       //Callback for click or select region
       //k.Callback(function(chr, start, end){ )});
@@ -42,23 +65,10 @@
       //Callback when user clicks on the Search button
       //k.CallbackSearch(function(regsel){ });
 
-      //Options for Karyo
-      k.Options({
-        //previewRegions: true,
-        //navbarHeight: 50,
-        //navbarShow: true,
-        //navbarShowKaryo: true,
-        //navbarShowSearch: true,
-        //navbarShowHelp: true,
-        //tipShow: true,
-        //tipText: 'You can personalize the tip message!',
-        //selectMax: -1,
-        //selectEnabled: true
-      });
-
       //Labels
       k.UseLabel({
-        chromosome: function(chr){
+        chromosome: function(chr)
+        {
           //Get the regions for this chromosome
           var regs = k.GetRegionsByChr(chr);
 
@@ -68,12 +78,23 @@
           //Return default
           return '0 positions';
         },
-        region: function(chr, reg){
-          //Get the regions for this chromosome
-          var regs = k.GetRegionsByChr(chr);
-
+        region: function(chr, region)
+        {
           //Return the label
-          return '' + regs[reg].label + ' reads';
+          return '' + region.label + ' reads';
+        }
+      });
+
+      //Report table
+      k.TableOpt({
+        colsName: ['Chr','Start','End','Label'],
+        //colsAlign: [],
+        //openShow: true,
+        //openText: 'Open',
+        parser: function(chr, region)
+        {
+          //Return the default row
+          return [chr, region.start, region.end, region.label + ' reads'];
         }
       });
 

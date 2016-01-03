@@ -1,7 +1,7 @@
 /**
  * karyojs - Chromosomal regions visualizer written in JavaScript
  * @version v1.0.0
- * @link http://lab.juanes.xyz/karyojs
+ * @link http://biowt.github.io/karyojs
  * @license MIT
  */
 
@@ -12,9 +12,14 @@ function Karyo(parent_id)
   this.info = {};
   this.info.name = 'Karyo.js'; //App name
   this.info.version = '1.0.0'; //Version ID
-  this.info.web = 'https://jmjuanes.github.io/karyojs'; //App website
-  this.info.repo = 'https://github.com/jmjuanes/karyojs/'; //Repository on GitHub
-  this.info.docs = 'https://github.com/jmjuanes/karyojs/tree/dev/docs'; //Documentation
+  this.info.web = 'https://biowt.github.io/karyojs'; //App website
+  this.info.repo = 'https://github.com/biowt/karyojs/'; //Repository on GitHub
+  this.info.docs = 'https://github.com/biowt/karyojs/wiki'; //Documentation
+
+  //Database
+  this.db = {};
+  this.db.version = 'v1'; //Database version
+  this.db.url = 'https://raw.githubusercontent.com/biowt/karyojs-species/{version}/{specie}.json';
 
   //Show the welcome on the console
   console.log('Karyo: ' + this.info.name + ' v' + this.info.version);
@@ -22,7 +27,7 @@ function Karyo(parent_id)
 
   //Start the default values
   this.default = {};
-  this.default.size = {'width': '100%', 'height': '330px'}; //Default width and height
+  this.default.size = {'width': '100%', 'height': '250px'}; //Default width and height
   this.default.svg = {'width': '100%', 'height': '100%'}; //Default svg width and size
   this.default.img = 'img/'; //Images folder
 
@@ -52,6 +57,10 @@ function Karyo(parent_id)
   this.navbar.btnSearchClass = 'karyo-navbar-btn karyo-navbar-btn-search'; //Search button css
   this.navbar.btnSearchTitle = 'Find region'; //Search button title
   this.navbar.btnSearchShow = true; //Search button show
+  this.navbar.btnTable = this.navbar.id + '_table'; //Table button ID
+  this.navbar.btnTableClass = 'karyo-navbar-btn karyo-navbar-btn-table'; //Table button css
+  this.navbar.btnTableTitle = 'Show/Hide table with all the regions'; //Table button title
+  this.navbar.btnTableShow = true; //Table button show
   this.navbar.btnHelp = this.navbar.id + '_help'; //Help button ID
   this.navbar.btnHelpClass = 'karyo-navbar-btn karyo-navbar-btn-help'; //Help button class
   this.navbar.btnHelpTitle = 'Get help'; //Help button title
@@ -105,7 +114,7 @@ function Karyo(parent_id)
   this.chrpreview = {};
   this.chrpreview.show = true; //Show preview region
   this.chrpreview.data = []; //Preview data
-  this.chrpreview.op = 0.8; //Preview region opacity
+  this.chrpreview.op = 0.7; //Preview region opacity
 
   //Start the chromosome detail info
   this.chrdetail = {};
@@ -242,6 +251,44 @@ function Karyo(parent_id)
   //Project status
   this.status = null;
 
+  //Table track
+  this.table = {};
+  this.table.id = this.parent.id + '_table'; //Table ID
+  this.table.class = 'karyo-table'; //Table class
+  this.table.display = 'karyo-table-display'; //Table display
+  this.table.head = 'karyo-table-head'; //Table head
+  this.table.content = 'karyo-table-content'; //Table content
+  this.table.active = true; //Table active
+  this.table.show = true; //Table show
+  this.table.width = '100%'; //Table width
+  this.table.height = 200; //Table height
+
+  //Table empty
+  this.tableempty = {};
+  this.tableempty.class = 'karyo-table-empty'; //Table empty class
+  this.tableempty.text = 'No region for this chromosome...'; //Table empty text
+
+  //Table rows
+  this.tablerows = {};
+  this.tablerows.class= 'karyo-table-row'; //Table row class
+  this.tablerows.over = 'karyo-table-row-over'; //Table row over class
+
+  //Table cols
+  this.tablecols = {};
+  this.tablecols.class = 'karyo-table-col'; //Cols class
+  this.tablecols.num = 4; //Number of columns
+  this.tablecols.names = ['Chr','Start','End','Label']; //Cols names
+  this.tablecols.width = []; //Cols width
+  this.tablecols.align = ['center', 'right', 'right', 'right']; //Cols align
+  this.tablecols.parser = null; //Cols parser
+
+  //Table open
+  this.tableopen = {};
+  this.tableopen.class = 'karyo-table-open'; //Open col
+  this.tableopen.text = 'Open'; //Open text
+  this.tableopen.show = true; //Open show
+  this.tableopen.width = 150; //Open width
+
   //Karyo Build Time out
   KaryoBuildTimeOut(this);
 }
@@ -263,6 +310,9 @@ Karyo.prototype.Build = function()
 
   //Append the alert
   $('#' + this.parent.id).append(this.AlertBuild());
+
+  //Append the table report
+  $('#' + this.parent.id).append(this.TableBuild());
 
   //Append the foot
   $('#' + this.parent.id).append(this.FootBuild());
@@ -507,17 +557,33 @@ Karyo.prototype.GetRegionsByChr = function(chr)
 }
 
 //Karyo Import Chromosomes list
-Karyo.prototype.ImportChrs = function(source, parser)
+Karyo.prototype.ImportChrs = function(opt)
 {
+  //Check if user has set import from the Karyo database
+  if(typeof opt.fromDB !== 'undefined')
+  {
+    //Convert to lower case
+    opt.fromDB = opt.fromDB.toLowerCase();
+
+    //User has set load chromosomes from database. Replace the specie
+    opt.url = this.db.url.replace('{specie}', opt.fromDB);
+
+    //Replace the database version
+    opt.url = opt.url.replace('{version}', this.db.version);
+
+    //Make the paser as null
+    opt.parser = null;
+  }
+
   //Call to the Import
-  this.Import('specie', source, parser);
+  this.Import('specie', opt.url, opt.parser);
 };
 
 //Karyo Import Regions
-Karyo.prototype.ImportRegions = function(source, parser)
+Karyo.prototype.ImportRegions = function(opt)
 {
   //Call to the Import
-  this.Import('region', source, parser);
+  this.Import('region', opt.url, opt.parser);
 };
 
 //Karyo Import from url
@@ -637,7 +703,20 @@ Karyo.prototype.NavbarBuild = function()
     div = div + '></div>';
   }
 
-  //Create the Karyo logo
+  //Create the table button
+  if(this.navbar.btnTableShow === true && this.table.show === true)
+  {
+    //Create the div for the help button
+    div = div + '<div class="' + this.navbar.btnTableClass + '" id="' + this.navbar.btnTable + '"';
+
+    //Add the title
+    div = div + 'title="' + this.navbar.btnTableTitle + '"';
+
+    //Close the button div
+    div = div + '></div>';
+  }
+
+  //Create the help button
   if(this.navbar.btnHelpShow === true)
   {
     //Create the div for the help button
@@ -665,6 +744,9 @@ Karyo.prototype.NavbarEvnt = function()
 
   //Start the navbar search button
   KaryoNavbarBtnSearchEvnt(this);
+
+  //Start the navbar table button
+  KaryoNavbarBtnTableEvnt(this);
 
   //Start the navbar help button
   KaryoNavbarBtnHelpEvnt(this);
@@ -737,6 +819,13 @@ Karyo.prototype.NavbarBtnSearchClick = function()
   }
 };
 
+//Karyo Table button click
+Karyo.prototype.NavbarBtnTableClick = function()
+{
+  //Show/Hide the table
+  this.TableShowHide();
+}
+
 //Karyo Help button click
 Karyo.prototype.NavbarBtnHelpClick = function()
 {
@@ -761,6 +850,13 @@ function KaryoNavbarBtnSearchEvnt(_main)
   $('#' + _main.navbar.input).keyup(function(e){ if(e.keyCode == 13){ _main.NavbarBtnSearchClick(); } });
 }
 
+//Navbar Table Event
+function KaryoNavbarBtnTableEvnt(_main)
+{
+  //If user clicks on the karyotypes button
+  $('#' + _main.navbar.btnTable).click(function(e){ _main.NavbarBtnTableClick(); });
+}
+
 //Karyo Navbar Help Event
 function KaryoNavbarBtnHelpEvnt(_main)
 {
@@ -773,7 +869,7 @@ Karyo.prototype.Resize = function()
 {
   //Save the parent size
   this.parent.width = $('#' + this.parent.id).width();
-  this.parent.height = $('#' + this.parent.id).height();
+  //this.parent.height = $('#' + this.parent.id).height();
 
   //Save the navbar size
   this.navbar.width = $('#' + this.navbar.id).width();
@@ -786,6 +882,10 @@ Karyo.prototype.Resize = function()
   //Save the svg size
   this.svg.width = $('#' + this.svg.id).width();
   this.svg.height = $('#' + this.svg.id).height();
+
+  //Save the table size
+  this.table.width = $('#' + this.table.id).width();
+  //this.table.height = $('#' + this.table.id).height();
 
   //Save the foot size
   this.foot.width = $('#' + this.foot.id).width();
@@ -1218,11 +1318,11 @@ Karyo.prototype.SetSize = function(w, h)
 {
   //Resize the parent div
   $('#' + this.parent.id).width(w);
-  $('#' + this.parent.id).height(h);
+  //$('#' + this.parent.id).height(h);
 
   //Calculate the width for the navbar
   var navw = 'calc(' + w + ' - ' + this.navbar.padding.left + 'px - ' + this.navbar.padding.right + 'px)';
-  
+
   //Resize the navbar
   $('#' + this.navbar.id).css('width', navw);
   $('#' + this.navbar.id).height(this.navbar.height);
@@ -1231,14 +1331,16 @@ Karyo.prototype.SetSize = function(w, h)
   $('#' + this.navbar.id).css('padding-left', this.navbar.padding.left);
   $('#' + this.navbar.id).css('padding-right', this.navbar.padding.right);
 
-  //Height for svg
-  var svgh =  parseInt(h);
-  svgh = svgh - ((this.navbar.show === false)? 0 : this.navbar.height);
-  svgh = svgh - ((this.foot.show === false)? 0 : this.foot.height);
-
   //Resize the svg
   $('#' + this.svg.id).width(w);
-  $('#' + this.svg.id).height(svgh);
+  $('#' + this.svg.id).height(parseInt(h));
+
+  //Resize the table
+  $('#' + this.table.id).width(this.table.width);
+  //$('#' + this.table.id).height(this.table.height);
+
+  //Check for show
+  $('#' + this.table.id).css('display', (this.table.show === true)? 'block': 'none');
 
   //Resize the loading div
   $('#' + this.loading.id).width(this.loading.width);
@@ -1355,6 +1457,9 @@ Karyo.prototype.Options = function(opt)
   //Check navbar show search button
   if(typeof opt.navbarShowSearch !== 'undefined'){ this.navbar.btnSearchShow = opt.navbarShowSearch; }
 
+  //Check navbar show table button
+  if(typeof opt.navbarShowTable !== 'undefined'){ this.navbar.btnTableShow = opt.navbarShowTable; } 
+
   //Check navbar show help button
   if(typeof opt.navbarShowHelp !== 'undefined'){ this.navbar.btnHelpShow = opt.navbarShowHelp; }
 
@@ -1369,6 +1474,9 @@ Karyo.prototype.Options = function(opt)
 
   //Select enabled
   if(typeof opt.selectEnabled !== 'undefined'){ this.select.enabled = opt.selectEnabled; }
+
+  //Show report table
+  if(typeof opt.showTable !== 'undefined'){ this.table.show = opt.showTable; }
 };
 
 //Utils main function
@@ -1954,6 +2062,9 @@ Karyo.prototype.DrawChrDetail = function(n)
   //Change the location
   this.status = 'detail';
 
+  //Show the table report
+  this.TableCreate(this.svg.draw.chr.id);
+
   //Show in console
   console.log('Karyo: opening chromosome ' + this.svg.draw.chr.id);
 };
@@ -2118,8 +2229,11 @@ Karyo.prototype.DrawChrDetailLabel = function(n)
     //Check for the second
     if(this.reglabel.parser !== null)
     {
+      //Get the region object
+      var robj = this.GetRegionsByChr(this.svg.draw.chr.id)[this.svg.draw.label.num];
+
       //Get the text
-      var txt = this.reglabel.parser(this.svg.draw.chr.id, this.svg.draw.label.num);
+      var txt = this.reglabel.parser(this.svg.draw.chr.id, robj);
 
       //Create the text
       this.svg.draw.label.text2 = this.svg.build.text(txt);
@@ -2279,7 +2393,7 @@ Karyo.prototype.DrawChrList = function()
         robj.addClass('karyo-region-bg').opacity(0);
 
         //Add the animation
-        robj.animate(time).opacity(0.5);
+        robj.animate(time).opacity(this.chrpreview.op);
 
         //Save the regions
         obj.preview.push(robj);
@@ -2364,6 +2478,9 @@ Karyo.prototype.DrawChrList = function()
 
   //Change the location
   this.status = 'list';
+
+  //Destroy the table
+  this.TableDestroy();
 };
 
 //Exit from chromosome list
@@ -3119,3 +3236,358 @@ Karyo.prototype.Plugins = function(name, callback)
     console.error('Karyo: "' + name + '" plugin not found');
   }
 };
+
+//Karyo Table options
+Karyo.prototype.TableOpt = function(opt)
+{
+  //Check for table title
+  //if(typeof opt.title !== 'undefined'){ this.tablebar.title = opt.title; }
+
+  //Check for table cols parser
+  if(typeof opt.parser !== 'undefined'){ this.tablecols.parser = opt.parser; }
+
+  //Check for table cols names
+  if(typeof opt.colsName !== 'undefined')
+  {
+    //Save the number of columns
+    this.tablecols.num = opt.colsName.length;
+
+    //Save the array
+    this.tablecols.names = opt.colsName;
+  }
+
+  //Check for table cols width
+  if(typeof opt.colsWidth !== 'undefined')
+  {
+    //Check the number
+    if(opt.colsWidth.length != this.tablecols.num)
+    {
+      //Show Error
+      console.error('Karyo: error in Table Options, number of width cols is not the same.');
+    }
+    else
+    {
+      //Save the array
+      //this.tablecols.width = opt.colsWidth;
+    }
+  }
+
+  //Check for cols align
+  if(typeof opt.colsAlign !== 'undefined')
+  {
+    //Check the number
+    if(opt.colsAlign.length != this.tablecols.num)
+    {
+      //Show Error
+      console.error('Karyo: error in Table Options, number of align cols is not the same.');
+    }
+    else
+    {
+      //Save the array
+      this.tablecols.align = opt.colsAlign;
+    }
+  }
+
+  //Check for show open
+  if(typeof opt.openShow !== 'undefined'){ this.tableopen.show = opt.openShow; }
+
+  //Check for open text
+  if(typeof opt.openText !== 'undefined'){ this.tableopen.text = opt.openText; }
+};
+
+//Karyo Table report builder
+Karyo.prototype.TableBuild = function()
+{
+  //Initialize the show table
+  var show = '';
+
+  //Check for show the report table
+  if(this.table.show === false)
+  {
+    //Hide the table report
+    show = 'style="display: none;"';
+  }
+
+  //Initialize the table div
+  var div = '<div id="' + this.table.id + '" class="' + this.table.class + '" ' + show + '>';
+
+  //Create the bar
+  //div = div + '<div id="' + this.tablebar.id + '" class="' + this.tablebar.class + '">';
+
+  //Add the track title
+  //div = div + '<span>' + this.tablebar.title + '</span>';
+
+  //Close the bar div
+  //div = div + '</div>';
+
+  //Create the content div
+  //div = div + '<div id="' + this.tablecont.id + '" class="' + this.tablecont.class + '"></div>';
+
+  //Close the table div
+  div = div + '</div>';
+
+  //Return the new div
+  return div;
+};
+
+//Karyo Table report show/hide
+Karyo.prototype.TableShowHide = function()
+{
+  //Check the actual status
+  if(this.table.active === true)
+  {
+    //Set active as false
+    this.table.active = false;
+
+    //Hide the table
+    $('#' + this.table.id).css('display', 'none');
+  }
+  else
+  {
+    //Set active as true
+    this.table.active = true;
+
+    //Show the table
+    $('#' + this.table.id).css('display', 'block');
+  }
+};
+
+//Karyo table build the rows
+Karyo.prototype.TableRowsMaker = function(c)
+{
+  //Check for header
+  var sheader = false;
+
+  //Check for the header
+  if(typeof c === 'undefined')
+  {
+    //Set c as the header
+    c = this.tablecols.names;
+
+    //Change all to upper case
+    for(var i = 0; i < c.length; i++)
+    {
+      c[i] = c[i].toUpperCase();
+    }
+
+    //Set show header as true
+    sheader = true;
+  }
+
+  //For calculate the correct col width
+  var ccorr = 0;
+
+  //Check for show open
+  if(this.tableopen.show === true)
+  {
+    //Correct width
+    ccorr = this.tableopen.width/c.length;
+  }
+
+  //Initialize the div
+  var d = '';
+
+  //Default width
+  var cwidth = 100/c.length;
+
+  //Read all
+  for(var i = 0; i < c.length; i++)
+  {
+    //Initialize the column style for this col
+    var cstyle = 'width: calc(' + cwidth + '% - ' + ccorr + 'px);';
+
+    /*/Check the col width
+    if(this.tablecols.width.length == this.tablecols.num)
+    {
+      //Add the width style
+      cstyle = 'width:' + this.tablecols.width[i] + ';';
+    }
+    */
+
+    //Check the col align
+    if(this.tablecols.align.length == this.tablecols.num)
+    {
+      //Add the text align
+      cstyle = cstyle + 'text-align:' + this.tablecols.align[i] + ';';
+    }
+
+    //Initialize the col
+    d = d + '<div class="' + this.tablecols.class + '" style="' + cstyle + '">';
+
+    //Add the col content
+    d = d + c[i];
+
+    //Close the col
+    d = d + '</div>';
+  }
+
+  //Chekc for add the open col
+  if(this.tableopen.show === true)
+  {
+    //Initialize the col
+    d = d + '<div class="' + this.tablecols.class + '" style="width:' + this.tableopen.width + 'px;">';
+
+    //Add the col content
+    if(sheader === false)
+    {
+      //Add the element
+      d = d + '<div class="' + this.tableopen.class + '">' + this.tableopen.text + '</div>';
+    }
+    else
+    {
+      //Add a empty col
+      d = d + '&nbsp;';
+    }
+
+    //Close the col
+    d = d + '</div>';
+  }
+
+  //Return the div
+  return d;
+};
+
+//Karyo Table build the table
+Karyo.prototype.TableCreate = function(chr)
+{
+  //Create the new div
+  var div = this.tableempty.text;
+
+  //For check if regions has added
+  var regionsOk = false;
+
+  //Check if regions is defined
+  if(this.region)
+  {
+    //Get the ID for this chr
+    var r = this.UtilFindID(this.region.el, chr);
+
+    //Check if region exists
+    if( r > -1)
+    {
+      //Set as true
+      regionsOk = true;
+
+      //Initialize the table
+      div = ''; // '<div class="' + this.table.class + '">';
+
+      //Add the header
+      div = div + '<div class="' + this.tablerows.class + ' ' + this.table.head + '">';
+
+      //Add the header content
+      div = div + this.TableRowsMaker();
+
+      //Close the header div
+      div = div + '</div>';
+
+      //Add the content class
+      div = div + '<div class="' + this.table.content + '">';
+
+      //Add the regions
+      for(var i = 0; i < this.region.el[r].regions.length; i++)
+      {
+        //Save the region
+        var re = this.region.el[r].regions[i];
+
+        //Array with the default row
+        var rinfo = [chr, re.start, re.end, '-'];
+
+        //Check for custom table parser
+        if(this.tablecols.parser !== null)
+        {
+          //Call the custom parser
+          rinfo = this.tablecols.parser(chr, re);
+        }
+        else if(this.reglabel.parser !== null)
+        {
+          //Save the custom label
+          rinfo[3] = this.reglabel.parser(chr, this.region.el[r].regions, i);
+        }
+
+        //Add the new row
+        div = div + '<div class="' + this.tablerows.class + ' ' + this.tablerows.over + '" ';
+
+        //Add the row ID
+        div = div + 'id="rep' + i + '">';
+
+        //Add the row content
+        div = div + this.TableRowsMaker(rinfo);
+
+        //Close the row
+        div = div + '</div>';
+      }
+
+      //Close the table content
+      div = div + '</div>';
+    }
+  }
+
+  //Show the new table
+  $('#' + this.table.id).html(div);
+
+  //Check for add the events
+  if(regionsOk === true)
+  {
+    //Add the display class
+    //$('#' + this.table.id).addClass(this.table.display);
+
+    //Add the regions events
+    for(var i = 0; i < this.region.el[r].regions.length; i++)
+    {
+      //Add the event for over and click
+      KaryoTableRowEvnt(this, i);
+    }
+  }
+  else
+  {
+    //Add the empty class
+    $('#' + this.table.id).addClass(this.tableempty.class);
+  }
+};
+
+//Karyo Table row over event
+Karyo.prototype.TableRowOver = function(r)
+{
+  //Destroy the last label
+  this.DrawChrDetailLabelDestroy();
+
+  //Create the new
+  this.DrawChrDetailLabel(r);
+};
+
+//Karyo Table row click event
+Karyo.prototype.TableRowClick = function(r)
+{
+  //Check the over region
+  if(this.svg.draw.label)
+  {
+    //Execute the callback
+    this.CallbackRun(this.svg.draw.label.start, this.svg.draw.label.end);
+  }
+};
+
+//Karyo Table destroy
+Karyo.prototype.TableDestroy = function()
+{
+  //Create an empty div
+  //var div = 'Select a chromosome for view the report.';
+
+  //Show the new table
+  $('#' + this.table.id).html('');
+
+  //Remove the empty class
+  $('#' + this.table.id).removeClass(this.tableempty.class);
+
+  //Remove the display class
+  //$('#' + this.table.id).removeClass(this.table.display);
+};
+
+//Karyo table over event
+function KaryoTableRowEvnt(_main, _i)
+{
+  //Add the over event
+  $('#rep' + _i).on('mouseover', function(){ _main.TableRowOver(_i); });
+
+  //Add the click event
+  $('#rep' + _i).click(function(e){ _main.TableRowClick(_i); });
+}
