@@ -24,23 +24,8 @@ Karyo.prototype.SetSize = function(w, h)
   $('#' + this.table.id).width(this.table.width);
   //$('#' + this.table.id).height(this.table.height);
 
-  //Set the table bar padding
-  $('#' + this.tablebar.id).css('padding-left', this.tablebar.padding.left);
-  $('#' + this.tablebar.id).css('padding-right', this.tablebar.padding.right);
-
-  //Calculate the width for the table bar
-  var tbarw = 'calc(' + this.tablebar.width + ' - ' + this.tablebar.padding.left + 'px - ' + this.tablebar.padding.right + 'px)';
-
-  //Resize the table bar
-  $('#' + this.tablebar.id).css('width', tbarw);
-  $('#' + this.tablebar.id).height(this.tablebar.height);
-
-  //Resize the table content
-  $('#' + this.tablecont.id).width(this.tablecont.width);
-  //$('#' + this.tablecont.id).height(this.tablecont.height);
-
   //Check for show
-  $('#' + this.tablecont.id).css('display', (this.table.active === true)? 'block': 'none');
+  $('#' + this.table.id).css('display', (this.table.show === true)? 'block': 'none');
 
   //Resize the loading div
   $('#' + this.loading.id).width(this.loading.width);

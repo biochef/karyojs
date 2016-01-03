@@ -17,13 +17,9 @@ Karyo.prototype.Resize = function()
   this.svg.width = $('#' + this.svg.id).width();
   this.svg.height = $('#' + this.svg.id).height();
 
-  //Save the tablebar size
-  this.tablebar.width = $('#' + this.tablebar.id).width();
-  this.tablebar.height = $('#' + this.tablebar.id).height();
-
-  //Save the tablecont size
-  this.tablecont.width = $('#' + this.tablecont.id).width();
-  this.tablecont.height = $('#' + this.tablecont.id).height();
+  //Save the table size
+  this.table.width = $('#' + this.table.id).width();
+  //this.table.height = $('#' + this.table.id).height();
 
   //Save the foot size
   this.foot.width = $('#' + this.foot.id).width();
