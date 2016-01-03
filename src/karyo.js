@@ -52,7 +52,7 @@ function Karyo(parent_id)
   this.navbar.btnSearchShow = true; //Search button show
   this.navbar.btnTable = this.navbar.id + '_table'; //Table button ID
   this.navbar.btnTableClass = 'karyo-navbar-btn karyo-navbar-btn-table'; //Table button css
-  this.navbar.btnTableTitle = 'Open/close table with all the regions'; //Table button title
+  this.navbar.btnTableTitle = 'Show/Hide table with all the regions'; //Table button title
   this.navbar.btnTableShow = true; //Table button show
   this.navbar.btnHelp = this.navbar.id + '_help'; //Help button ID
   this.navbar.btnHelpClass = 'karyo-navbar-btn karyo-navbar-btn-help'; //Help button class
@@ -107,7 +107,7 @@ function Karyo(parent_id)
   this.chrpreview = {};
   this.chrpreview.show = true; //Show preview region
   this.chrpreview.data = []; //Preview data
-  this.chrpreview.op = 0.8; //Preview region opacity
+  this.chrpreview.op = 0.7; //Preview region opacity
 
   //Start the chromosome detail info
   this.chrdetail = {};
@@ -248,42 +248,39 @@ function Karyo(parent_id)
   this.table = {};
   this.table.id = this.parent.id + '_table'; //Table ID
   this.table.class = 'karyo-table'; //Table class
+  this.table.display = 'karyo-table-display'; //Table display
+  this.table.head = 'karyo-table-head'; //Table head
+  this.table.content = 'karyo-table-content'; //Table content
   this.table.active = true; //Table active
-  this.table.show = false; //Table show report
+  this.table.show = true; //Table show
   this.table.width = '100%'; //Table width
-  this.table.height = 0; //Table height
+  this.table.height = 200; //Table height
 
-  //Table bar
-  this.tablebar = {};
-  this.tablebar.id = this.table.id + '_bar'; //Table bar ID
-  this.tablebar.class = 'karyo-table-bar'; //Table bar class
-  this.tablebar.width = '100%'; //Table bar width
-  this.tablebar.height = 30; //Table bar height
-  this.tablebar.title = 'Regions report'; //Table bar title
-  this.tablebar.padding = {left: 10, right: 10}; //Table bar padding
+  //Table empty
+  this.tableempty = {};
+  this.tableempty.class = 'karyo-table-empty'; //Table empty class
+  this.tableempty.text = 'No region for this chromosome...'; //Table empty text
 
-  //Table content
-  this.tablecont = {};
-  this.tablecont.id = this.table.id + '_cont'; //Table content ID
-  this.tablecont.class = 'karyo-table-cont'; //Table content class
-  this.tablecont.width = '100%'; //Table content width
-  this.tablecont.height = '200px'; //Table content height
-  this.tablecont.empty = 'karyo-table-cont-empty'; //Table empty class
-
-  //Table report
-  this.tablereport = {};
-  this.tablereport.class= 'karyo-table-report'; //Table report class
-  this.tablereport.row = 'karyo-table-report-row'; //Table report row
-  this.tablereport.over = 'karyo-table-report-row-over'; //Table report row over
-  this.tablereport.col = 'karyo-table-report-col'; //Table report col
+  //Table rows
+  this.tablerows = {};
+  this.tablerows.class= 'karyo-table-row'; //Table row class
+  this.tablerows.over = 'karyo-table-row-over'; //Table row over class
 
   //Table cols
   this.tablecols = {};
+  this.tablecols.class = 'karyo-table-col'; //Cols class
   this.tablecols.num = 4; //Number of columns
   this.tablecols.names = ['Chr','Start','End','Label']; //Cols names
   this.tablecols.width = []; //Cols width
   this.tablecols.align = ['center', 'right', 'right', 'right']; //Cols align
   this.tablecols.parser = null; //Cols parser
+
+  //Table open
+  this.tableopen = {};
+  this.tableopen.class = 'karyo-table-open'; //Open col
+  this.tableopen.text = 'Open'; //Open text
+  this.tableopen.show = true; //Open show
+  this.tableopen.width = 150; //Open width
 
   //Karyo Build Time out
   KaryoBuildTimeOut(this);
