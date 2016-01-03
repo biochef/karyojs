@@ -8,7 +8,7 @@ Chromosomal regions visualizer written in JavaScript.
 
 ### Documentation
 
-See the [documentation page](./docs/) for a usage guide, build documentation, and more.
+See the [wiki](./wiki) for a usage guide, build documentation, and more.
 
 
 ### License
