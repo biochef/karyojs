@@ -34,12 +34,13 @@
         //navbarShow: true,
         //navbarShowKaryo: true,
         //navbarShowSearch: true,
+        //navbarShowTable: true,
         //navbarShowHelp: true,
         //tipShow: true,
         //tipText: 'You can personalize the tip message!',
         //selectMax: -1,
         //selectEnabled: true,
-        //showTable: false
+        //showTable: true
       });
 
       //Use the Human test specie from local
@@ -86,10 +87,10 @@
 
       //Report table
       k.TableOpt({
-        title: 'Regions report',
         colsName: ['Chr','Start','End','Label'],
-        //colsWidth: [],
         //colsAlign: [],
+        //openShow: true,
+        //openText: 'Open',
         parser: function(chr, region)
         {
           //Return the default row
