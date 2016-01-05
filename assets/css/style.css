@@ -75,7 +75,8 @@
 .karyo-table-display { height: 200px; }
 
 /* Karyo table empty */
-.karyo-table-empty { height: 50px; text-align: center; line-height: 50px; }
+.karyo-table-empty { height: 50px; text-align: center; line-height: 50px; background-color: #e3eaf3; }
+.karyo-table-empty { font-weight: bold; font-size: 13px; }
 
 /* Karyo table head */
 .karyo-table-head { border-bottom: 0px solid #ccdde4; padding-right: 20px !important; font-weight: bold; }
@@ -93,7 +94,7 @@
 
 /* Karyo table row over */
 .karyo-table-row-over { cursor: hand; }
-.karyo-table-row-over:hover { background-color: #B3E5FC; }
+.karyo-table-row-over:hover { background-color: #d6e0ed; } 
 
 /* Karyo table col */
 .karyo-table-col { display: inline-block; float: left; }
@@ -125,16 +126,16 @@
 .karyo-foot-powered { padding-right: 5px; color: #546E7A; }
 
 /* Karyo chromosome */
-.karyo-chr { stroke: #00B0FF; fill: #ecf6fd; stroke-width: 1.5px; }
+.karyo-chr { stroke: #588bfe; fill: #f1f5ff; stroke-width: 1.5px; }
 
 /* Karyo hover box */
-.karyo-hover { fill: #00B0FF; }
+.karyo-hover { fill: #588bfe; }
 
 /* Karyo label box */
 .karyo-label { fill: #ed321f; }
 
 /* Karyo centromere */
-.karyo-centromere { fill: #00B0FF; }
+.karyo-centromere { fill: #588bfe; }
 .karyo-centromere-bg { fill: #ffffff; }
 
 /* Karyo region */
