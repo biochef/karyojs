@@ -212,7 +212,7 @@ Karyo.prototype.TableRowsMaker = function(c)
 Karyo.prototype.TableCreate = function(chr)
 {
   //Create the new div
-  var div = this.tableempty.text;
+  var div = this.tableempty.text.toUpperCase();
 
   //For check if regions has added
   var regionsOk = false;
