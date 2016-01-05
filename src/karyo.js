@@ -259,7 +259,7 @@ function Karyo(parent_id)
   //Table empty
   this.tableempty = {};
   this.tableempty.class = 'karyo-table-empty'; //Table empty class
-  this.tableempty.text = 'No region for this chromosome...'; //Table empty text
+  this.tableempty.text = 'No regions for this chromosome...'; //Table empty text
 
   //Table rows
   this.tablerows = {};
